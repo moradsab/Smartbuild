@@ -1,0 +1,156 @@
+/* Stats.css */
+
+/* Base container for the stat cards */
+.dashboard-stats {
+  display: grid;
+  /* Always force 2 columns for a consistent grid layout (2x2 for 4 cards) */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* Consistent space between stat cards */
+  margin-top: 3rem; /* Reduced margin-top for compactness */
+}
+
+/* Individual stat card styling */
+.stat-card {
+  background-color: #ffffff;
+  border-radius: 12px; /* Softer rounded corners */
+  padding: 1rem; /* Adjusted padding for a more compact height on all screens */
+  display: flex;
+  flex-direction: column; /* Stack header row and content vertically */
+  align-items: flex-end; /* Align content to the right for RTL */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid #e0e6ed; /* Light border for definition */
+  text-align: right; /* Align text right for Hebrew */
+  max-height:  220px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+/* Header row for icon and title (new structure for consistency) */
+.stat-header-row {
+  display: flex; /* Make this a flex container */
+  flex-direction: row; /* Arrange icon and title in a row */
+  justify-content: flex-end; /* Push icon to right, title to left in RTL */
+  align-items: center; /* Vertically center icon and title */
+  width: 100%; /* Take full width of the card */
+  margin-bottom: 0.1rem; /* Space between header row and value/note */
+}
+
+.stat-icon-wrapper {
+  background-color: #e6f0ff; /* Light blue background for icons */
+  border-radius: 50%;
+  padding: 0.5rem; /* Padding inside the wrapper */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Fixed size for icon wrapper */
+  height: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-right: 0.7rem; /* Space between icon wrapper and title in RTL */
+  order: 1; /* Place icon first (on the right in RTL flex-row) */
+}
+
+.stat-icon {
+  font-size: 1.6rem; /* Icon size */
+  color: #3b82f6; /* Primary blue color for icons */
+}
+
+.stat-title {
+  font-size: 1rem; /* Adjusted title size */
+  color: #555;
+  font-weight: 600;
+  order: 2; /* Place title second (on the left in RTL flex-row) */
+  flex-grow: 1; /* Allow title to take remaining space */
+}
+
+/* Content area for value and note */
+.stat-content {
+  display: flex; /* Make stat-content a flex container itself */
+  flex-direction: column; /* Stack value, note within stat-content */
+  align-items: flex-end; /* Align value, note to the right */
+  width: 100%; /* Ensure it takes full width */
+}
+
+.stat-value {
+  font-size: 1.8rem; /* Value size */
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1.1; /* Tighter line height */
+  margin-bottom: 0.1rem; /* Small margin below value */
+}
+
+.stat-note {
+  font-size: 0.85rem; /* Note size */
+  color: #7f8c8d;
+}
+
+/* Color variations for stat cards (matching the provided JS) */
+.stat-card.progress .stat-icon-wrapper { background-color: #e6f0ff; }
+.stat-card.progress .stat-icon { color: #3b82f6; } /* Blue */
+
+.stat-card.debt .stat-icon-wrapper { background-color: #ffe6e6; }
+.stat-card.debt .stat-icon { color: #ef4444; } /* Red */
+
+.stat-card.business-debt .stat-icon-wrapper { background-color: #fffbe6; }
+.stat-card.business-debt .stat-icon { color: #f59e0b; } /* Orange */
+
+.stat-card.profit .stat-icon-wrapper { background-color: #e6ffed; }
+.stat-card.profit .stat-icon { color: #10b981; } /* Green */
+
+/* Responsive adjustments for Stats */
+@media (max-width: 768px) {
+  .dashboard-stats {
+    gap: 0.8rem;
+  }
+  .stat-card {
+    padding: 0.9rem; /* Further reduced padding for tablets */
+  }
+  .stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    padding: 0.45rem;
+    margin-right: 0.6rem;
+  }
+  .stat-icon {
+    font-size: 1.4rem;
+  }
+  .stat-title {
+    font-size: 0.9rem;
+  }
+  .stat-value {
+    font-size: 1.6rem;
+  }
+  .stat-note {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-stats {
+    gap: 0.7rem;
+  }
+  .stat-card {
+    padding: 0.8rem;
+  }
+  .stat-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    padding: 0.4rem;
+    margin-right: 0.5rem;
+  }
+  .stat-icon {
+    font-size: 1.2rem;
+  }
+  .stat-title {
+    font-size: 0.8rem;
+  }
+  .stat-value {
+    font-size: 1.4rem;
+  }
+  .stat-note {
+    font-size: 0.7rem;
+  }
+}

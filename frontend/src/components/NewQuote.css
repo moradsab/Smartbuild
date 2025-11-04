@@ -1,0 +1,332 @@
+/* QuotePage.css - Improved to match NewVisit.css design principles */
+
+/* --- Base Layout and Form Container --- */
+.quote-page {
+  width: 100%; /* Take full width on smaller screens */
+  max-width: 800px; /* Aligned with NewVisit.css max-width */
+  margin: 5rem auto; /* Consistent margin with NewVisit.css */
+  padding: 5rem 1.5rem; /* Consistent padding with NewVisit.css */
+
+  font-family: 'Inter', sans-serif; /* Keeping Inter for a modern feel */
+  background: linear-gradient(135deg, #f0f7ff95, #e3efff7f); /* Matched gradient from NewVisit.css */
+  border-radius: 14px; /* Matched border-radius from NewVisit.css */
+  box-shadow: 0 12px 30px rgba(10, 45, 130, 0.18); /* Matched shadow from NewVisit.css */
+  color: #1e2a47; /* Matched text color */
+  direction: rtl; /* Right-to-left for Hebrew */
+  text-align: right;
+  user-select: none;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* --- Titles --- */
+.quote-title {
+  font-size: 1.5rem; /* Matched form-title font-size from NewVisit.css */
+  font-weight: 700; /* Matched form-title font-weight */
+  color: #0d1a40; /* Matched form-title color */
+  margin-bottom: 1.8rem; /* Matched form-title margin-bottom */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* Matched form-title gap */
+  user-select: text;
+}
+
+.section h3 {
+  font-size: 1.2rem; /* Slightly adjusted, close to label font size */
+  font-weight: 600; /* Matched label font-weight */
+  color: #102d6f; /* Matched label color */
+  margin-bottom: 1rem; /* Consistent spacing */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Matched label gap */
+  user-select: text;
+}
+
+/* --- Sections --- */
+.section {
+  margin-bottom: 2rem; /* Consistent with form-section margin-bottom */
+  /* Removed background, padding, border-radius, box-shadow to match NewVisit.css form-section simplicity */
+}
+
+/* --- Project Description --- */
+.project-description {
+  background-color: #eef3ff; /* Light blue background */
+  padding: 1rem; /* Adjusted padding */
+  border-radius: 10px; /* Consistent rounded corners */
+  color: #1e2a47;
+  line-height: 1.6;
+  user-select: text;
+}
+
+/* --- Photos Grid --- */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted min width for better fit */
+  gap: 1rem; /* Consistent gap */
+}
+
+.photo-box {
+  background-color: #fff;
+  border-radius: 12px; /* Consistent with NewVisit.css photo-card */
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(10, 40, 100, 0.1); /* Consistent with NewVisit.css photo-card */
+  transition: all 0.25s ease; /* Consistent transition */
+}
+
+.photo-box:hover {
+  box-shadow: 0 6px 18px rgba(10, 40, 100, 0.15); /* Consistent hover shadow */
+}
+
+.photo-box img {
+  width: 100%;
+  height: 180px; /* Fixed height for consistent image display */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #f0f4f7; /* Subtle separator */
+}
+
+.photo-details {
+  padding: 0.8rem 1.2rem; /* More padding inside details */
+  font-size: 0.95rem;
+  color: #324374;
+  line-height: 1.5;
+}
+
+/* --- Item Rows (for dynamic items like measurements) --- */
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.item-row input {
+  flex: 1;
+  padding: 0.7rem 1rem; /* Consistent with NewVisit.css input padding */
+  border-radius: 10px; /* Consistent with NewVisit.css input border-radius */
+  border: 2px solid #ccd6f6; /* Consistent with NewVisit.css input border */
+  font-size: 1rem;
+  color: #1e2a47;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  min-width: 120px;
+}
+
+.item-row input:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+}
+
+.item-row button {
+  background-color: transparent; /* Matched NewVisit.css button style */
+  color: #e63946; /* Matched delete-photo-button color */
+  border: none;
+  border-radius: 10px; /* Consistent border-radius */
+  padding: 0.7rem 1.2rem; /* Generous padding */
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.item-row button:hover {
+  background-color: #ffe0e3; /* Matched delete-photo-button hover */
+  transform: translateY(-1px);
+}
+
+/* --- Action Buttons --- */
+.add-item-button,
+.generate-button {
+  font-family: inherit;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px; /* Consistent with NewVisit.css button border-radius */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  user-select: none;
+}
+
+.add-item-button {
+  background-color: transparent; /* Matched NewVisit.css button style */
+  color: #2a5cff; /* Matched add-photo-button color */
+  padding: 0.7rem 1.4rem; /* Matched add-photo-button padding */
+  font-size: 1.05rem; /* Matched add-photo-button font-size */
+  margin-top: 1rem;
+}
+
+.add-item-button:hover {
+  background-color: #f0f4f7 !important; /* Matched add-photo-button hover */
+  transform: none; /* Removed transform on hover for consistency */
+  box-shadow: none; /* Removed box-shadow on hover for consistency */
+}
+
+.generate-button {
+  background-color: transparent; /* Matched NewVisit.css button style */
+  color: #2a5cff; /* Matched submit-button color */
+  font-weight: 700;
+  padding: 0.7rem 1.4rem; /* Matched submit-button padding */
+  width: 100%;
+  font-size: 1.05rem; /* Matched submit-button font-size */
+  margin-top: 2rem;
+  box-shadow: none; /* Removed box-shadow for consistency */
+}
+
+.generate-button:hover {
+  background-color: #f0f4f7 !important; /* Matched submit-button hover */
+  transform: none; /* Removed transform on hover for consistency */
+  box-shadow: none; /* Removed box-shadow on hover for consistency */
+}
+
+/* --- Quote Text Area --- */
+.quote-text-box textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 0.7rem 1rem; /* Consistent with NewVisit.css textarea padding */
+  border-radius: 10px; /* Consistent with NewVisit.css textarea border-radius */
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  border: 2px solid #ccd6f6; /* Consistent with NewVisit.css textarea border */
+  background-color: #fff;
+  resize: vertical;
+  color: #1e2a47;
+  line-height: 1.6;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.quote-text-box textarea:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For screens up to 768px (Tablets and smaller desktops) */
+@media (max-width: 768px) {
+  .quote-page {
+    margin: 2rem auto;
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .quote-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+  }
+
+  .photos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .photo-box img {
+    height: 160px;
+  }
+
+  .item-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .item-row input,
+  .item-row button {
+    width: 100%;
+  }
+
+  .add-item-button,
+  .generate-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+/* For screens up to 480px (Mobile Portrait) */
+@media (max-width: 480px) {
+  .quote-page {
+    margin: 3rem auto;
+    padding: 1.5rem 1rem;
+    border-radius: 0; /* Full width without rounded corners on very small screens */
+    box-shadow: none; /* No shadow on very small screens */
+  }
+
+  .quote-title {
+    font-size: 1.3rem; /* Matched form-title font-size on mobile */
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .section h3 {
+    font-size: 1rem; /* Smaller section title */
+    margin-bottom: 0.7rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+  }
+
+  .photos-grid {
+    grid-template-columns: 1fr; /* Single column layout on mobile */
+    gap: 1rem;
+  }
+
+  .photo-box {
+    box-shadow: 0 3px 10px rgba(10, 40, 100, 0.1); /* Lighter shadow for photo boxes */
+  }
+
+  .photo-box img {
+    height: 200px;
+  }
+
+  .photo-details {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .item-row input,
+  .item-row button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .add-item-button,
+  .generate-button {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem; /* Matched button font-size on mobile */
+    border-radius: 10px;
+  }
+
+  .generate-button {
+    margin-top: 1.5rem;
+  }
+
+  .quote-text-box textarea {
+    min-height: 200px;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+}

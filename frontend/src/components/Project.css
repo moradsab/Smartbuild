@@ -1,0 +1,1005 @@
+/* ProjectDetail.css - Refactored and improved CSS */
+
+/* Base container styling */
+.project-detail-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  direction: rtl;
+  font-family: 'Inter', sans-serif;
+  color: #1e2a47;
+  box-sizing: border-box;
+  background-color: #f9faff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(10, 45, 130, 0.08);
+}
+
+/* Header Section */
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project-header-info {
+  flex: 1;
+  text-align: right;
+}
+
+.project-title-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align to right for RTL */
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.project-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0d1a40;
+  margin: 0;
+}
+
+.project-subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Base Button Styles */
+.project-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.95rem; /* Default button font size */
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  /* Default focus styles */
+  outline: none;
+  box-shadow: none;
+}
+
+.project-button:focus-visible {
+  outline: 2px solid #2a5cff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+}
+
+/* Button Variants */
+.button-default {
+  background-color: #2a4cbc3f;
+  color: white;
+}
+
+.button-default:hover {
+  background-color: #1836a13b;
+}
+
+.button-outline {
+  border: 1px solid #e0e6f0;
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+.button-outline:hover {
+  background-color: #f0f4f7;
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: #1f2937;
+}
+
+.button-ghost:hover {
+  background-color: #f0f4f7;
+}
+
+/* Button Sizes */
+.button-sm {
+  height: 2rem; /* 32px */
+  padding: 0 0.75rem; /* px-3 */
+}
+
+.button-md {
+  height: 2.5rem; /* 40px */
+  padding: 0 1rem; /* px-4 py-2 */
+}
+
+.button-lg {
+  height: 3rem; /* 48px */
+  padding: 0 1.5rem; /* px-6 */
+}
+
+/* Specific button overrides/additions */
+.project-back-button {
+  color: #1f2937; /* Specific color for back button */
+}
+
+.project-back-button:hover {
+  background-color: #f0f4f7;
+}
+
+.project-edit-button,
+.project-add-button {
+  color: #2a5cff; /* Blue text for action buttons */
+}
+
+.project-edit-button:hover,
+.project-add-button:hover {
+  background-color: #f0f4f7;
+}
+
+/* Icon adjustments for RTL/LTR context */
+.project-icon-rtl {
+  margin-right: 0.5rem;
+  /* For RTL, icon is on the right, so margin-right is needed */
+}
+
+.project-icon-ltr {
+  margin-left: 0.5rem;
+  /* For LTR, icon is on the left, so margin-left is needed */
+}
+
+.project-icon-base {
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+}
+
+/* Quick Stats Section */
+.project-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.project-card { /* Base styling for all cards */
+  border: 1px solid #e0e6f0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f8faff);
+  box-shadow: 0 8px 20px rgba(10, 45, 130, 0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(10, 45, 130, 0.12);
+}
+
+.card-content-no-padding-top {
+  padding-top: 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0d1a40;
+}
+
+.stat-icon {
+  width: 2rem; /* 32px */
+  height: 2rem; /* 32px */
+  color: #2a5cff; /* Default icon color */
+}
+
+.stat-emoji {
+  font-size: 2rem; /* 32px */
+}
+
+/* Color utility classes for stats */
+.text-green { color: #1e8449; }
+.text-red { color: #c0392b; }
+.text-purple { color: #8e44ad; }
+
+/* Main Content Tabs */
+.project-tabs {
+  margin-bottom: 2rem;
+}
+
+.project-tabs-list {
+  display: flex;
+  background-color: #eef3ff;
+  border-radius: 10px;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  justify-content: space-around;
+  margin-bottom: 1.5rem; /* Adjusted for consistency */
+  flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+}
+
+.project-tabs-trigger {
+  flex: 1;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem; /* Adjusted for consistency */
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #324374; /* Inactive tab text color */
+  user-select: none;
+}
+
+.project-tabs-trigger:hover {
+  background-color: #f0f4f7;
+}
+
+.project-tabs-trigger.active {
+  background-color: #ffffff;
+  color: #1b40ff; /* Active tab text color */
+}
+
+/* IMPORTANT: This class is crucial for the tab navigation to work */
+.hidden {
+  display: none !important;
+}
+
+/* Card Titles within Tabs */
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #102d6f;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card-title-rtl {
+  flex-direction: row-reverse; /* For RTL icon alignment */
+}
+
+.card-title-right {
+  text-align: right; /* For titles that are just text */
+}
+
+.card-title-icon {
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+}
+
+/* Overview Tab - Client Information & Project Details */
+.project-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+  .project-overview-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on large screens */
+  }
+}
+
+.client-info-content,
+.project-details-content {
+  padding-top: 1rem; /* Added padding to content area */
+}
+
+.client-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* 12px */
+  justify-content: flex-end; /* Align to right for RTL */
+  margin-bottom: 1rem; /* Spacing between items */
+}
+
+.client-info-item-start {
+  align-items: flex-start; /* For address with multi-line text */
+}
+
+.client-info-icon {
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  color: #6b7280; /* Gray icon color */
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.client-info-icon-mt {
+  margin-top: 0.25rem; /* For FaMapPin to align with text */
+}
+
+.client-info-text {
+  font-weight: 500;
+  text-align: right;
+  color: #1e2a47;
+}
+
+.client-info-subtext {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280;
+  text-align: right;
+}
+
+.project-details-label {
+  display: block;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #6b7280;
+  text-align: right;
+  margin-bottom: 0.25rem;
+}
+
+.project-details-text {
+  margin-top: 0.25rem;
+  text-align: right;
+  color: #1e2a47;
+  line-height: 1.5;
+}
+
+.project-details-text-bold {
+  margin-top: 0.25rem;
+  font-weight: 500;
+  text-align: right;
+  color: #1e2a47;
+}
+
+.project-details-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.project-details-item {
+  text-align: right;
+}
+
+.project-details-badge-container {
+  margin-top: 0.25rem;
+}
+
+/* Quote Information Table */
+.project-table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(10, 45, 130, 0.08);
+  padding: 1rem;
+}
+
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Adjusted min-width for table */
+}
+
+.project-table-header {
+  background-color: #f8faff;
+}
+
+.project-table-head {
+  padding: 1rem 0.75rem;
+  text-align: right;
+  font-weight: 700;
+  color: #102d6f;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  border-bottom: 1px solid #e0e6f0;
+}
+
+.project-table-body {
+  background-color: #ffffff;
+}
+
+.project-table-row {
+  border-bottom: 1px solid #e0e6f0;
+}
+
+.project-table-row:last-child {
+  border-bottom: none; /* No border for the last row */
+}
+
+.project-table-row:hover {
+  background-color: #f8faff; /* Lighter hover background */
+}
+
+.project-table-cell {
+  padding: 1rem 0.75rem;
+  font-size: 0.9rem;
+  color: #324374;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+.table-cell-medium {
+  font-weight: 500;
+  color: #1e2a47;
+}
+
+.table-cell-bold {
+  font-weight: 700;
+  color: #1e2a47;
+}
+
+.table-cell-lg {
+  font-size: 1.125rem; /* 18px */
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; } /* Explicit for RTL */
+
+.table-row-summary {
+  background-color: #f8faff; /* Consistent with header background */
+}
+
+/* Photos Tab */
+.project-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min-width for photos */
+  gap: 1.5rem;
+}
+
+.photo-card-item {
+  overflow: hidden;
+}
+
+.photo-card-image-container {
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+  background-color: #f0f4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-card-details {
+  padding: 1rem;
+}
+
+.photo-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.photo-card-category-badge {
+  background-color: #e0e6f0;
+  color: #324377;
+  padding: 0.25rem 0.625rem; /* px-2.5 py-0.5 */
+  border-radius: 9999px; /* full rounded */
+  font-size: 0.75rem; /* xs */
+  font-weight: 500;
+}
+
+.photo-card-date {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.photo-card-title {
+  font-weight: 500;
+  text-align: right;
+  color: #1e2a47;
+}
+
+/* Expenses Tab */
+.expense-category-badge {
+  background-color: #e0e6f0;
+  color: #324377;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+/* Tasks Tab */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(10, 45, 130, 0.05);
+}
+
+.task-details-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.task-status-dot {
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  border-radius: 9999px; /* full rounded */
+  flex-shrink: 0;
+}
+
+.task-text-right {
+  text-align: right;
+}
+
+.task-title {
+  font-weight: 500;
+  color: #1e2a47;
+}
+
+.task-assignee {
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280;
+}
+
+.task-meta-left {
+  text-align: left; /* Align right for RTL */
+}
+
+.task-due-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Invoices Tab */
+.invoice-item-group {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e6f0; /* Separator for invoice groups */
+}
+
+.invoice-item-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.invoice-summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(10, 45, 130, 0.05);
+  margin-bottom: 1rem;
+}
+
+.invoice-summary-text-right {
+  text-align: right;
+}
+
+.invoice-id {
+  font-weight: 500;
+  color: #1e2a47;
+}
+
+.invoice-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.invoice-summary-text-left {
+  text-align: left;
+}
+
+.invoice-amount {
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+  color: #1e2a47;
+}
+
+.payment-history-section {
+  margin-right: 1.5rem; /* Adjusted for RTL */
+  margin-left: unset; /* Reset default */
+  padding-top: 0.5rem; /* Small padding */
+}
+
+.payment-history-title {
+  font-weight: 500;
+  text-align: right;
+  margin-bottom: 0.5rem;
+  color: #1e2a47;
+}
+
+.payment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #f8faff;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.payment-item-text-right {
+  text-align: right;
+}
+
+.payment-amount {
+  font-weight: 500;
+  color: #1e2a47;
+}
+
+.payment-method {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.payment-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: left;
+}
+
+.payment-remaining-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #fffbe6;
+  border-radius: 6px;
+  border: 1px solid #ffe58f;
+  margin-top: 1rem;
+}
+
+.payment-remaining-label {
+  font-weight: 500;
+  color: #8a6d3b; /* Darker yellow text */
+  text-align: right;
+}
+
+.payment-remaining-value {
+  font-weight: 700;
+  color: #8a6d3b;
+  text-align: left;
+}
+
+/* Profitability Tab */
+.profit-details-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .profit-details-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+.profit-content-list {
+  padding-top: 1rem;
+}
+
+.profit-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.profit-item-row.border-bottom {
+  border-bottom: 1px solid #e0e6f0;
+}
+
+.profit-item-row.border-top {
+  border-top: 1px solid #e0e6f0;
+}
+
+.profit-item-row.bold-lg {
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+}
+
+.profit-item-label {
+  text-align: right;
+  color: #1e2a47;
+}
+
+.profit-item-value {
+  font-weight: 700;
+  text-align: left;
+  color: #1e2a47; /* Default color */
+}
+
+.profit-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+  gap: 1rem;
+  margin-bottom: 1rem; /* Spacing before profit margin card */
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .profit-summary-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+  }
+}
+
+.profit-summary-card {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.profit-summary-label {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.profit-summary-value {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+}
+
+.profit-margin-card {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.profit-margin-value {
+  font-size: 2rem; /* 32px */
+  font-weight: 700;
+}
+
+/* Background colors for profitability cards */
+.green-bg { background-color: #e6ffed; }
+.red-bg { background-color: #ffe6e6; }
+.blue-bg { background-color: #e6f0ff; }
+.purple-bg { background-color: #f0e6ff; }
+
+/* Darker text colors for profitability */
+.text-green-dark { color: #1e8449; }
+.text-red-dark { color: #c0392b; }
+.text-blue-dark { color: #2a5cff; }
+.text-purple-dark { color: #8e44ad; }
+
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) { /* Adjustments for screens smaller than large desktop */
+  .project-detail-container {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 768px) { /* Tablet and smaller desktop */
+  .project-detail-container {
+    padding: 1.5rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(10, 45, 130, 0.06);
+  }
+
+  .project-header {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+  }
+
+  .project-main-title {
+    font-size: 1.8rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-header-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .project-title-group {
+    justify-content: center;
+  }
+
+  .project-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .project-back-button {
+    order: -1; /* Place back button at the top */
+  }
+
+  .project-stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid on tablets */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1.2rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .project-tabs-list {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for tabs on tablet */
+    gap: 0.5rem;
+    padding: 0.4rem;
+  }
+
+  .project-tabs-trigger {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .project-overview-grid {
+    grid-template-columns: 1fr; /* Single column for overview cards */
+    gap: 1.5rem;
+  }
+
+  .project-table {
+    min-width: 500px; /* Adjust min-width for table on tablet */
+  }
+
+  .project-table-head,
+  .project-table-cell {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .project-photos-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for photos on tablet */
+  }
+
+  .payment-history-section {
+    margin-right: 1rem; /* Adjusted margin */
+  }
+
+  .profit-details-grid {
+    grid-template-columns: 1fr; /* Single column for profitability details on tablet */
+  }
+
+  .profit-summary-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for profitability summary on tablet */
+  }
+}
+
+@media (max-width: 480px) { /* Mobile Portrait */
+  .project-detail-container {
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .project-header {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-main-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .project-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .project-stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns for mobile */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(10, 45, 130, 0.06);
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .project-tabs-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tabs on mobile */
+    gap: 0.4rem;
+    padding: 0.3rem;
+  }
+
+  .project-tabs-trigger {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .project-label,
+  .client-info-text,
+  .client-info-subtext,
+  .project-details-text,
+  .project-details-text-bold,
+  .project-details-item {
+    text-align: center; /* Center text in client/project details */
+  }
+
+  .client-info-item {
+    justify-content: center; /* Center client detail items */
+  }
+
+  .project-table {
+    min-width: 400px; /* Adjust min-width for table on mobile */
+  }
+
+  .project-table-head,
+  .project-table-cell {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .project-photos-grid {
+    grid-template-columns: 1fr; /* Single column for photos on mobile */
+  }
+
+  .payment-history-section {
+    margin-right: 0.5rem; /* Adjusted margin */
+  }
+
+  .profit-summary-grid {
+    grid-template-columns: 1fr; /* Single column for profitability summary on mobile */
+  }
+
+  .profit-summary-card,
+  .profit-margin-card {
+    padding: 0.8rem;
+  }
+
+  .profit-summary-value {
+    font-size: 1.4rem;
+  }
+
+  .profit-margin-value {
+    font-size: 2rem;
+  }
+}

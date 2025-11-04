@@ -1,0 +1,122 @@
+/* HomePage.css */
+
+/* Base container for the entire home page */
+.home-container {
+  display: flex;
+  flex-direction: column; /* Stacks content vertically */
+  min-height: 100vh; /* Ensures it takes at least the full viewport height */
+  /* Background gradient specific to the home page */
+  background: linear-gradient(130deg, #f0f7ffa4, #e3efffa8);
+  padding: 1rem; /* Overall padding for the page content */
+  margin-top: 1rem;
+  
+  /* font-family is handled by main.css */
+  /* box-sizing is handled by main.css */
+}
+
+/* Main content area within the home page, grows to fill available space */
+.home-main {
+  flex-grow: 1; /* Allows the main content to take up available vertical space */
+  padding-bottom: 70px; /* Provides space for the fixed bottom navigation bar */
+  padding-top: 1rem; /* Adds some top padding below any potential header area */
+  margin-bottom: 1rem; /* Adds a small margin at the bottom */
+}
+
+/* Fixed Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed; /* Positions the navigation bar relative to the viewport */
+  bottom: 0; /* Aligns to the bottom of the viewport */
+  left: 0; /* Aligns to the left of the viewport */
+  width: 100%; /* Spans the full width of the viewport */
+  background-color: #ffffff; /* White background for the nav bar */
+  padding: 0.5rem 1rem; /* Vertical and horizontal padding */
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03); /* Softer shadow above the nav bar */
+  z-index: 1000; /* Ensures it stays on top of other content */
+  display: flex; /* Uses flexbox for internal layout */
+  justify-content: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  border-top: 1px solid #e0e6ed; /* Subtle border at the top */
+}
+
+/* Responsive adjustments for HomePage layout */
+/* Container: centers on all screens */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;             /* full screen height */
+  background: #f9fafb;       /* light background */
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 500;
+  gap: 12px;
+  padding: 16px;             /* padding for small screens */
+  text-align: center;
+}
+
+/* Spinner design */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #e5e7eb;      /* light gray border */
+  border-top: 5px solid #3b82f6;  /* blue top border */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animation for spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+/* For screens up to 1024px (e.g., larger tablets, small laptops) */
+@media (max-width: 1024px) {
+  .home-container {
+    padding: 1.2rem; /* Adjust padding for medium screens */
+  }
+  .bottom-nav {
+    padding: 0.1rem 0.8rem; /* Slightly adjusted padding for compactness */
+  }
+}
+
+/* For screens up to 768px (e.g., tablets) */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 1rem; /* Reduced overall padding for tablets */
+  }
+  .home-main {
+    padding-top: 0.8rem; /* Adjusted top padding */
+  }
+  .bottom-nav {
+    padding: 0.1rem 0.8rem; /* Further adjusted padding for tablets */
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.025); /* Softer shadow for tablets */
+  }
+}
+
+/* For screens up to 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .home-container {
+    padding: 0.1rem; /* Further reduced overall padding for small mobiles */
+  }
+  .home-main {
+    padding-top: 1.5rem; /* Adjusted top padding for mobile */
+  }
+  .bottom-nav {
+    padding: 0.1rem 0.5rem; /* Further adjusted padding for small mobiles */
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.02); /* Very subtle shadow for mobiles */
+  }
+    .loading-container {
+    font-size: 1rem;      /* slightly smaller text on phones */
+    gap: 10px;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}

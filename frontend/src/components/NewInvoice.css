@@ -1,0 +1,285 @@
+/* InvoicePage.css - Improved to match NewVisit.css design principles */
+
+/* --- Base Layout and Form Container --- */
+.invoice-page {
+  width: 100%; /* Take full width on smaller screens */
+  max-width: 800px; /* Aligned with NewVisit.css max-width */
+  margin: 5rem auto; /* Consistent margin with NewVisit.css */
+  padding: 2rem 1.5rem; /* Consistent padding with NewVisit.css */
+
+  font-family: 'Inter', sans-serif; /* Using Inter for a modern feel */
+  background: linear-gradient(135deg, #f0f7ff95, #e3efff7f); /* Matched gradient from NewVisit.css */
+  border-radius: 14px; /* Matched border-radius from NewVisit.css */
+  box-shadow: 0 12px 30px rgba(10, 45, 130, 0.18); /* Matched shadow from NewVisit.css */
+  color: #1e2a47; /* Matched text color */
+  direction: rtl; /* Right-to-left for Hebrew */
+  text-align: right;
+  user-select: none;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* --- Titles --- */
+.invoice-title {
+  font-size: 1.5rem; /* Matched form-title font-size from NewVisit.css */
+  font-weight: 700; /* Matched form-title font-weight */
+  color: #0d1a40; /* Matched form-title color */
+  margin-bottom: 1.8rem; /* Matched form-title margin-bottom */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* Matched form-title gap */
+  user-select: text;
+}
+
+.invoice-preview h3 {
+  font-size: 1.2rem; /* Consistent with section h3 / label font size */
+  font-weight: 600; /* Consistent with label font-weight */
+  color: #102d6f; /* Consistent with label color */
+  margin-bottom: 0.8rem; /* Consistent spacing */
+  display: flex; /* Ensure flex for potential icons */
+  align-items: center;
+  gap: 0.5rem;
+  user-select: text;
+}
+
+/* --- Form Groups --- */
+.form-group {
+  margin-bottom: 1.5rem; /* Increased margin for better spacing */
+}
+
+.form-group label {
+  font-weight: 600;
+  display: flex; /* Use flex to align with potential icons */
+  align-items: center;
+  gap: 0.5rem; /* Space for icons */
+  margin-bottom: 0.5rem;
+  color: #102d6f; /* Matched label color from NewVisit.css */
+  user-select: text;
+}
+
+/* --- Inputs, Select, Textarea --- */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.7rem 1rem; /* Consistent with NewVisit.css input padding */
+  border: 2px solid #ccd6f6; /* Consistent with NewVisit.css input border */
+  border-radius: 10px; /* Consistent with NewVisit.css input border-radius */
+  font-size: 1rem;
+  color: #1e2a47;
+  background-color: #ffffff;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 120px; /* Adjusted min-height for better initial appearance */
+  resize: vertical;
+  font-family: inherit; /* Inherit from global font */
+  line-height: 1.6; /* Improved readability */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2a5cff;
+  outline: none;
+  background-color: #eef3ff; /* Matched focus background from NewVisit.css */
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2); /* Matched focus glow */
+}
+
+/* --- Checkbox Group --- */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 1.5rem;
+  margin-top: 1.5rem; /* Adjusted margin-top */
+  margin-bottom: 1.5rem; /* Added margin-bottom for consistency */
+}
+
+.checkbox-group label {
+  font-weight: 500;
+  color: #1e2a47;
+  display: flex; /* Ensure label content is aligned */
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+  /* Basic styling for checkbox */
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid #ccd6f6;
+  appearance: none; /* Hide default checkbox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: #2a5cff;
+  border-color: #2a5cff;
+}
+
+.checkbox-group input[type="checkbox"]:checked::before {
+  content: '✓'; /* Checkmark for checked state */
+  display: block;
+  color: white;
+  font-size: 14px;
+  line-height: 15px; /* Adjust for vertical centering */
+  text-align: center;
+}
+
+.checkbox-group input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+  border-color: #2a5cff;
+}
+
+
+/* --- Generate Button --- */
+.generate-button {
+  width: 100%;
+  background-color: transparent; /* Matched submit-button style from NewVisit.css */
+  color: #2a5cff; /* Matched submit-button color */
+  font-weight: 700;
+  font-size: 1.05rem; /* Matched submit-button font-size */
+  border: none;
+  padding: 0.7rem 1.4rem; /* Matched submit-button padding */
+  margin-top: 2rem; /* Adjusted margin-top for consistency */
+  border-radius: 10px; /* Matched submit-button border-radius */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  box-shadow: none; /* Removed box-shadow for consistency */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.generate-button:hover {
+  background-color: #f0f4f7 !important; /* Matched submit-button hover */
+}
+
+/* --- Invoice Preview Section --- */
+.invoice-preview {
+  margin-top: 2.5rem; /* Increased margin for better separation */
+  padding-top: 1.5rem; /* Added padding-top for visual separation */
+  border-top: 1px solid #e0e6f0; /* Subtle top border for separation */
+}
+
+
+/* --- Responsive Adjustments --- */
+
+/* For screens up to 768px (Tablets and smaller desktops) */
+@media (max-width: 768px) {
+  .invoice-page {
+    margin: 2rem auto;
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .invoice-title {
+    font-size: 1.8rem; /* Slightly smaller title */
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  textarea {
+    min-height: 100px; /* Smaller min-height for tablets */
+  }
+
+  .checkbox-group {
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .generate-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .invoice-preview {
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+}
+
+/* For screens up to 480px (Mobile Portrait) */
+@media (max-width: 480px) {
+  .invoice-page {
+    margin: 3rem auto;
+    padding: 1.5rem 1rem;
+    border-radius: 0; /* Full width without rounded corners on very small screens */
+    box-shadow: none; /* No shadow on very small screens */
+  }
+
+  .invoice-title {
+    font-size: 1.3rem; /* Matched form-title font-size on mobile */
+    margin-bottom: 1.5rem;
+    justify-content: center; /* Center title on mobile */
+    text-align: center;
+  }
+
+  .invoice-preview h3 {
+    font-size: 1.1rem; /* Smaller section title on mobile */
+    margin-bottom: 0.7rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  textarea {
+    min-height: 80px; /* Even smaller min-height for mobile */
+  }
+
+  .checkbox-group {
+    flex-direction: column; /* Stack checkboxes vertically */
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .generate-button {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem; /* Matched button font-size on mobile */
+    border-radius: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .invoice-preview {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+}

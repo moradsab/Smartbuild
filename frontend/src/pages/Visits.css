@@ -1,0 +1,177 @@
+/* Visits.css - Final Layout and Padding */
+
+/* --- Main Container & Overall Layout --- */
+.visits-container {
+  background: linear-gradient(130deg, #f0f7ffa4, #e3efffa8);
+  /* Removed min-height: 100vh to fix unnecessary scrolling. */
+  /* The container will now only expand as much as its content requires. */
+  padding: 6rem 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Responsive Card Grid Layout --- */
+.visit-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+/* --- Individual Visit Card Styling --- */
+.visit-card {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05),
+              0 4px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Hover Effect for Interaction */
+.visit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08),
+              0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Card Header Styling --- */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.customer-name {
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.visit-date {
+  font-size: 0.9rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- Card Body Styling --- */
+.card-body {
+  margin-bottom: 1.5rem;
+  border-left: 3px solid #3b82f6; /* A subtle accent line */
+  padding-left: 1rem;
+}
+
+.card-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+/* --- Card Footer Styling - FIXED --- */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.customer-type {
+  background-color: #d1e5f8;
+  color: #3b82f6;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.item-count {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* --- State Messages (Loading & No Visits) --- */
+.loading-message,
+.no-visits-message,
+.error-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Use viewport height here to keep the message centered on an empty page. */
+  min-height: 100vh;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+  padding: 1rem;
+}
+
+.loading-message {
+  color: #3b82f6;
+}
+
+.error-message {
+  color: #ef4444;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+  .visits-container {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .visits-container {
+    padding: 2rem 1rem;
+  }
+  .visit-cards-grid {
+    gap: 2rem;
+  }
+  .visit-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .visits-container {
+    padding: 7rem 0.5rem;
+  }
+  .visit-cards-grid {
+    gap: 1.5rem;
+  }
+  .visit-card {
+    padding: 1rem;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .customer-name {
+    font-size: 1rem;
+  }
+  .visit-date {
+    font-size: 0.8rem;
+  }
+}

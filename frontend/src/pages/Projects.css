@@ -1,0 +1,421 @@
+/* ProjectsPage.css - Improved to match NewVisit.css design principles */
+
+.projects-container {
+  padding: 2rem; /* More generous padding */
+  max-width: 1200px;
+  margin: 3rem auto; /* Adjusted margin for overall page positioning */
+  direction: rtl;
+  font-family: 'Inter', sans-serif; /* Consistent modern font */
+  color: #1e2a47; /* Consistent text color */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* --- Header Section --- */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem; /* Increased margin for better separation */
+  gap: 1rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: space-between; /* Distribute items */
+}
+
+.header button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background-color: transparent; /* Transparent background for consistent button style */
+  color: #2a5cff; /* Blue text color for primary actions */
+  padding: 0.7rem 1.4rem; /* Consistent padding */
+  border-radius: 10px; /* Consistent border-radius */
+  cursor: pointer;
+  font-weight: 700; /* Bolder font weight */
+  transition: all 0.3s ease; /* Smooth transition */
+  user-select: none;
+}
+
+.header button:hover {
+  background-color: #f0f4f7 !important; /* Consistent hover background */
+}
+
+.back-button {
+  color: #1f2937 !important; /* Keep original color for back button */
+  /* No background on hover for back button */
+}
+
+/* --- Summary Grid --- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns for 2x2 layout */
+  gap: 1.5rem; /* Increased gap for better spacing */
+  margin-bottom: 2rem; /* Increased margin */
+}
+
+.summary-card {
+  border: 1px solid #e0e6f0; /* Softer border color */
+  border-radius: 14px; /* More rounded corners */
+  padding: 1.5rem; /* More padding */
+  background: linear-gradient(135deg, #ffffff, #f8faff); /* Subtle gradient background */
+  box-shadow: 0 8px 20px rgba(10, 45, 130, 0.08); /* Softer, deeper shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px); /* Subtle lift effect */
+  box-shadow: 0 12px 25px rgba(10, 45, 130, 0.12);
+}
+
+.summary-card .label {
+  font-size: 0.95rem; /* Slightly larger font */
+  color: #6b7280;
+  margin-bottom: 0.3rem; /* Space between label and value */
+}
+
+.summary-card .value {
+  font-size: 1.8rem; /* Larger value font */
+  font-weight: 800; /* Extra bold */
+  color: #0d1a40; /* Darker color for values */
+}
+
+.summary-card .icon-box {
+  background-color: #eef3ff; /* Light blue background */
+  padding: 0.7rem; /* More padding */
+  border-radius: 50%;
+  display: flex; /* Center icon */
+  align-items: center;
+  justify-content: center;
+  color: #2a5cff; /* Blue icon color */
+}
+
+/* --- Filters Section --- */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem; /* Increased margin */
+  flex-wrap: wrap;
+  align-items: center; /* Align items vertically */
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 200px; /* Ensure search input has a minimum width */
+}
+
+.search-input-wrapper input {
+  width: 100%; /* Full width within its flex container */
+  padding: 0.7rem 2.5rem 0.7rem 1rem; /* Adjusted padding for icon and text */
+  border-radius: 10px; /* Consistent border-radius */
+  border: 2px solid #ccd6f6; /* Consistent border style */
+  font-size: 1rem;
+  color: #1e2a47;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-input-wrapper input:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+}
+
+.search-input-wrapper svg {
+  position: absolute;
+  top: 50%;
+  right: 1rem; /* Position icon inside the input */
+  transform: translateY(-50%);
+  color: #6b7280; /* Softer icon color */
+  font-size: 1.2rem; /* Larger icon */
+}
+
+.filters select {
+  padding: 0.7rem 1rem; /* Consistent padding */
+  border-radius: 10px; /* Consistent border-radius */
+  border: 2px solid #ccd6f6; /* Consistent border style */
+  font-size: 1rem;
+  color: #1e2a47;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  -webkit-appearance: none; /* Remove default arrow */
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%231e2a47"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>');
+  background-repeat: no-repeat;
+  background-position: left 0.7rem center; /* Position custom arrow on the left */
+  background-size: 1.2rem;
+  padding-left: 2.5rem; /* Make space for custom arrow */
+  cursor: pointer;
+}
+
+.filters select:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2);
+}
+
+/* --- Projects Table --- */
+.projects-table-wrapper {
+  overflow-x: auto; /* Enable horizontal scrolling for table on small screens */
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(10, 45, 130, 0.08); /* Consistent shadow */
+  padding: 1rem; /* Padding inside the wrapper */
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px; /* Ensure table doesn't shrink too much on smaller screens */
+}
+
+.projects-table thead tr {
+  background-color: #f8faff; /* Lighter header background */
+}
+
+.projects-table th,
+.projects-table td {
+  padding: 1rem 0.75rem; /* More padding for cells */
+  text-align: right;
+  border-bottom: 1px solid #e0e6f0; /* Softer border */
+}
+
+.projects-table th {
+  font-weight: 700;
+  color: #102d6f; /* Darker header text */
+  font-size: 0.95rem;
+  white-space: nowrap; /* Prevent header text from wrapping */
+}
+
+.projects-table td {
+  font-size: 0.9rem;
+  color: #324374; /* Softer body text color */
+}
+
+.projects-table td div {
+  font-weight: 600; /* Bolder for main text in cell */
+  color: #1e2a47;
+}
+
+.projects-table td small {
+  color: #6b7280; /* Softer color for small text */
+  font-size: 0.8rem;
+}
+
+.projects-table td button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2a5cff; /* Consistent button color */
+  padding: 0.3rem; /* Small padding for clickable area */
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.projects-table td button:hover {
+  background-color: #eef3ff; /* Light background on hover */
+}
+
+.no-projects {
+  text-align: center;
+  padding: 3rem; /* More padding */
+  color: #6b7280;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.no-projects svg {
+  opacity: 0.4; /* Softer opacity */
+  margin: 0 auto 1.5rem; /* More margin below icon */
+  color: #a0aec0; /* Softer icon color */
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover,
+.clickable-row:focus {
+  background-color: #f8faff; /* Lighter hover background */
+  outline: none;
+  user-select: none;
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For screens up to 768px (Tablets and smaller desktops) */
+@media (max-width: 768px) {
+  .projects-container {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
+
+  .header {
+    flex-direction: column; /* Stack header items */
+    align-items: flex-end; /* Align to the right in RTL */
+    gap: 0.8rem;
+  }
+
+  .header h1 {
+    width: 100%; /* Full width for title */
+    text-align: center; /* Center title */
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .header button {
+    width: 100%; /* Full width for buttons */
+    justify-content: center; /* Center button content */
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .back-button {
+    order: -1; /* Place back button at the top */
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for tablets as well */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-card {
+    padding: 1.2rem;
+  }
+
+  .summary-card .value {
+    font-size: 1.5rem;
+  }
+
+  .filters {
+    flex-direction: column; /* Stack filters vertically */
+    align-items: stretch; /* Stretch filters to full width */
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input-wrapper {
+    width: 100%; /* Full width */
+    min-width: unset; /* Remove min-width constraint */
+  }
+
+  .search-input-wrapper input,
+  .filters select {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .projects-table-wrapper {
+    padding: 0.8rem;
+  }
+
+  .projects-table th,
+  .projects-table td {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .projects-table td div {
+    font-size: 0.9rem;
+  }
+}
+
+/* For screens up to 480px (Mobile Portrait) */
+@media (max-width: 480px) {
+  .projects-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .header button {
+    margin-top: 5rem;
+    padding: 1rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns for mobile */
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-card {
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(10, 45, 130, 0.06);
+  }
+
+  .summary-card .value {
+    font-size: 1.4rem;
+  }
+
+  .summary-card .icon-box {
+    padding: 0.5rem;
+  }
+
+  .filters {
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-input-wrapper input,
+  .filters select {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .search-input-wrapper svg {
+    right: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .filters select {
+    padding-left: 2rem; /* Adjust for smaller icon */
+    background-position: left 0.5rem center;
+    background-size: 1rem;
+  }
+
+  .projects-table-wrapper {
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(10, 45, 130, 0.06);
+  }
+
+  .projects-table {
+    min-width: 600px; /* Keep a minimum width to prevent extreme squishing */
+  }
+
+  .projects-table th,
+  .projects-table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .projects-table td div {
+    font-size: 0.85rem;
+  }
+
+  .projects-table td small {
+    font-size: 0.7rem;
+  }
+
+  .no-projects {
+    padding: 2rem;
+    font-size: 1rem;
+  }
+
+  .no-projects svg {
+    margin: 0 auto 1rem;
+    font-size: 30px; /* Smaller icon */
+  }
+}

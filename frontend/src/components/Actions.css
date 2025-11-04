@@ -1,0 +1,115 @@
+/* Actions.css */
+
+/* Wrapper for the action buttons bar */
+.actions-wrapper {
+  width: 100%;
+  height: 90px;
+  padding: 0.3rem 0;
+  background-color: #fff;
+  border-top: 1px solid #e0e6ed;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
+  display: flex;
+  justify-content: center;
+}
+
+/* Horizontal scrollable grid */
+.actions-grid {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.actions-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual action card */
+.action-card {
+  flex: 0 0 auto;
+  width: 80px;
+  min-width: 200px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2c3e50;
+  background-color: #fff !important;
+  border: 1px solid rgba(224, 230, 237, 0.7);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+  border-color: rgba(179, 209, 255, 0.8);
+}
+
+.action-card:active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Icon inside the card */
+.action-icon {
+  font-size: 1.2rem;
+  background: none !important; /* Remove any background */
+  color: #3b83f6e4 !important;
+  padding: 0; /* Ensure no space around icon */
+  border: none; /* In case border is adding shape */
+  box-shadow: none; /* Remove any inner/outer glow */
+  border-radius: 0; /* Remove circular background */
+}
+
+/* Responsive: tablets */
+@media (max-width: 768px) {
+  .actions-wrapper {
+    padding: 0.25rem 0;
+  }
+  .actions-grid {
+    gap: 0.7rem;
+    padding: 0 0.8rem;
+  }
+  .action-card {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    min-width: 120px;
+  }
+  .action-icon {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive: small mobiles */
+@media (max-width: 480px) {
+  .actions-wrapper {
+    padding: 0.2rem 0;
+    height: 80px;
+  }
+  .actions-grid {
+    gap: 0.3rem;
+    padding: 0 0.5rem;
+  }
+  .action-card {
+    min-width: 70px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+  .action-icon {
+    font-size: 0.9rem;
+  }
+}

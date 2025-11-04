@@ -1,0 +1,410 @@
+/* NewVisitForm.css */
+
+/* --- Base Layout and Form --- */
+.new-visit-form {
+  width: 100%; /* Takes full width on smaller screens */
+  max-width: 800px; /* Max width for larger screens, centers the form */
+  margin: 3rem auto; /* Centers the form horizontally, keeps top/bottom margin */
+  padding: 2rem 1.5rem; /* Consistent horizontal padding for content inside the form */
+
+  background: linear-gradient(135deg, #f0f7ff95, #e3efff7f);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(10, 45, 130, 0.18); /* Softer, deeper shadow */
+  /* Font-family removed to inherit from main.css (Heebo) for consistency */
+  color: #1e2a47;
+  direction: rtl;
+  text-align: right;
+  user-select: none;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.form-title {
+  margin-top: 0rem; /* Adjusted, padding is on the form itself */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d1a40;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
+  user-select: text;
+}
+
+/* --- Form Sections --- */
+.form-section {
+  margin-bottom: 2rem;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #102d6f;
+  user-select: text;
+}
+
+.required {
+  color: #e63946;
+  font-weight: 900;
+  margin-right: 0.3rem;
+  user-select: text;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid #ccd6f6;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #1e2a47;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 92, 255, 0.2); /* Subtle focus glow */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 72px;
+  font-family: inherit; /* Inherit from global font */
+  /* Padding adjusted to make space for both absolute-positioned buttons at the bottom-left */
+  padding-bottom: 120px; /* Enough space for both buttons + margin */
+  padding-left: 65px; /* Enough space for record button (50px width + 1rem left + buffer) */
+  transition: padding 0.3s ease; /* Smooth transition for padding change */
+}
+
+/* --- Photos Section --- */
+.photos-section {
+  margin-bottom: 2rem;
+}
+
+.photos-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d1a40;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  user-select: text;
+}
+
+.photo-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(10, 40, 100, 0.1);
+  padding: 1rem 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.25s ease;
+}
+
+.photo-card:hover {
+  box-shadow: 0 6px 18px rgba(10, 40, 100, 0.15);
+}
+
+.upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2a5cff;
+  cursor: pointer;
+  margin-bottom: 0.6rem;
+  transition: color 0.3s ease;
+}
+
+.upload-label:hover {
+  color: #1835a1;
+}
+
+.file-input {
+  display: none;
+}
+
+.preview {
+  margin: 0.8rem 0 1rem;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(10, 40, 100, 0.2);
+  object-fit: contain;
+  max-height: 240px;
+}
+
+.measurements {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.measurements input[type="number"] {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #f5f8ff;
+  color: #1e2a47;
+}
+
+.measurements input::placeholder {
+  color: #94a3b8;
+}
+
+.photo-card textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1.5px solid #c7d0e9;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #324374;
+  transition: border-color 0.3s ease;
+  /* Padding adjusted for photo card textarea, similar to main textarea */
+  padding-left: 65px; /* Enough space for record button + margin */
+}
+
+.photo-card textarea:focus {
+  border-color: #2a5cff;
+  background-color: #eef3ff;
+}
+
+/* --- General Buttons --- */
+.add-photo-button,
+.delete-photo-button,
+.submit-button {
+  font-family: inherit;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.add-photo-button {
+  background-color: transparent;
+  color: #2a5cff;
+  padding: 0.7rem 1.4rem;
+  font-size: 1.05rem;
+}
+
+.add-photo-button:hover {
+  background-color: #f0f4f7 !important;
+}
+
+.delete-photo-button {
+  margin-top: 0.8rem;
+  background-color: transparent;
+  color: #e63946;
+  padding: 0.45rem 1rem;
+  font-size: 0.95rem;
+}
+
+.delete-photo-button:hover {
+  background-color: #ffe0e3; /* Added subtle background on hover */
+}
+
+.submit-button {
+  background-color: transparent;
+  color: #2a5cff;
+  padding: 0.7rem 1.4rem;
+  font-size: 1.05rem;
+}
+
+.submit-button:hover {
+   background-color: #f0f4f7 !important;
+  }
+
+/* --- Error Message --- */
+.error-message {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1.5px solid #f5c2c7;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* --- Textarea and Recording Button Container --- */
+.textarea-container {
+  position: relative;
+  margin-bottom: 1rem; /* Keep margin for spacing below container */
+}
+
+/* --- Record/Send Button --- */
+.record-button {
+  width: 50px; /* WhatsApp-like size */
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent; /* No background */
+  border: 2px solid #1b40ff; /* Blue border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1b40ff; /* Blue icon */
+  box-shadow: 0 2px 8px rgba(27, 64, 255, 0.2); /* Subtle blue shadow */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  flex-shrink: 0;
+  position: absolute; /* Position inside textarea container */
+  bottom: 1rem; /* Adjusted to be 1rem from bottom of textarea container */
+  left: 1rem; /* 1rem from left of textarea container */
+  z-index: 10; /* Ensure it's above textarea content */
+}
+
+.record-button:hover {
+  background-color: rgba(27, 64, 255, 0.05); /* Very light blue background on hover */
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(27, 64, 255, 0.3); /* More pronounced shadow on hover */
+}
+
+/* Recording (unlocked) state - retains red for active recording */
+.record-button.recording {
+  background-color: #ff3b30; /* Red when recording */
+  border-color: #ff3b30; /* Red border */
+  color: white; /* White icon */
+  animation: pulse-red 1.5s infinite cubic-bezier(0.66, 0, 0.34, 1); /* Smoother pulse */
+  transform: scale(1.1); /* Slightly larger when recording */
+  box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); /* Initial pulse shadow */
+}
+
+/* Recording (locked) state - becomes send button with blue border */
+.record-button.locked {
+  background-color: transparent; /* No background */
+  border: 2px solid #1b40ff; /* Blue border */
+  color: #1b40ff; /* Blue icon */
+  animation: none; /* Stop pulsing when locked */
+  transform: translateY(-10px) scale(1); /* Move up slightly when locked */
+  box-shadow: 0 0 0 5px rgba(27, 64, 255, 0.2); /* Blue glow */
+}
+
+.record-button .release-hint {
+  position: absolute;
+  top: -2.5rem; /* Position above button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.record-button.recording:not(.locked) .release-hint {
+  opacity: 1;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 59, 48, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+}
+
+/* --- Cancel Button for Locked Recording --- */
+.cancel-locked-button {
+  position: absolute;
+  bottom: 4.5rem; /* Adjusted: relative to record button's position */
+  left: 1rem; /* Align with record button */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent; /* No background */
+  border: none; /* No border */
+  color: #dc3545; /* Red icon only */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: none; /* No shadow */
+  transition: transform 0.2s ease, opacity 0.2s ease; /* Subtle transition */
+  z-index: 11; /* Ensure it's above other elements and record button */
+}
+
+.cancel-locked-button:hover {
+  transform: scale(1.1); /* Slightly larger on hover */
+  opacity: 0.8; /* Slightly transparent on hover */
+  background-color: transparent !important; /* Removed !important */
+}
+
+/* --- Responsive Adjustments --- */
+/* For screens larger than 768px (Desktop) */
+@media (min-width: 768px) {
+  .new-visit-form {
+    padding: 2.5rem 2rem; /* More generous padding on desktop */
+  }
+}
+
+/* For screens larger than 600px (Tablet Landscape / Small Desktop) */
+@media (min-width: 600px) {
+  /* No specific min-width adjustments needed for .new-visit-form here,
+     as max-width and margin auto handle centering */
+}
+
+/* For screens up to 480px (Mobile Portrait) */
+@media (max-width: 480px) {
+  .new-visit-form {
+    padding: 1.5rem 1rem; /* Reduced padding for small mobiles */
+    border-radius: 0; /* Make it full width without rounded corners on very small screens */
+  }
+
+  .form-title {
+    font-size: 1.3rem; /* Slightly smaller title */
+    margin-bottom: 1.5rem;
+  }
+
+  .photo-card {
+    padding: 0.8rem 1rem 1.2rem; /* Reduce padding inside photo cards */
+  }
+
+  .add-photo-button,
+  .delete-photo-button,
+  .submit-button {
+    font-size: 0.95rem; /* Slightly smaller font size for buttons */
+  }
+
+  .submit-button {
+    padding: 0.8rem 0; /* Reduce submit button padding */
+  }
+
+  /* Textarea padding on mobile */
+  textarea {
+    padding-bottom: 100px; /* Adjusted for smaller screens */
+    padding-left: 60px; /* Adjusted for smaller screens */
+  }
+
+  .record-button {
+    width: 45px; /* Slightly smaller button on mobile */
+    height: 45px;
+    bottom: 1.5rem; /* Adjusted for smaller screens */
+    left: 1rem; /* Adjusted for smaller screens */
+  }
+
+  .cancel-locked-button {
+    width: 35px; /* Slightly smaller button on mobile */
+    height: 35px;
+    bottom: 6rem; /* Adjusted for smaller screens (relative to new record button bottom) */
+    left: 1rem; /* Adjusted for smaller screens */
+    font-size: 1rem; /* Smaller icon */
+  }
+}

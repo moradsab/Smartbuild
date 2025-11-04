@@ -1,0 +1,71 @@
+/* main.css */
+
+/* Global Font Import - Ensures Heebo is available throughout the app */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+
+/* Global box-sizing for consistent layout calculations */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Base styles for HTML, Body, and Root element */
+html, body, #root {
+  height: 100%; /* Ensures the root elements take full viewport height */
+  width: 100%; /* Ensures full viewport width */
+  margin: 0; /* Removes default browser margin */
+  padding: 0; /* Removes default browser padding */
+  direction: rtl; /* Sets text direction to Right-to-Left for Hebrew */
+  font-family: 'Heebo', sans-serif; /* Applies the professional Heebo font globally */
+  color: #333; /* Default text color for better readability */
+  line-height: 1.6; /* Improved line spacing for readability */
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering on WebKit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Smoother font rendering on Firefox */
+}
+
+/* Main application container - provides a flexible layout for the entire app */
+.app-container {
+  display: flex;
+  flex-direction: column; /* Stacks children vertically (e.g., header, main content, footer) */
+  min-height: 100vh; /* Ensures the app container is at least full viewport height */
+  /* Background color removed here to allow page-specific backgrounds to show through */
+}
+
+/* Main content area within the app - grows to fill available space */
+.main-content {
+  flex: 1; /* Allows the main content to grow and take available vertical space */
+  width: 100%; /* Ensures the main content takes full available horizontal space */
+  overflow-y: auto; /* Enables vertical scrolling for content if it overflows */
+  padding: 0.8rem; /* Generous padding around the main content area */
+  /* Background color removed here to allow page-specific backgrounds to show through */
+}
+
+/* General button reset for consistent styling across browsers */
+button {
+  background: none; /* Removes default background */
+  border: none; /* Removes default border */
+  padding: 0; /* Removes default padding */
+  font: inherit; /* Inherits font styles from parent */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  outline: none; /* Removes default focus outline for a cleaner look */
+  -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap for mobile devices */
+}
+
+/* Custom scrollbar styling for a modern look */
+::-webkit-scrollbar {
+  width: 8px; /* Width of vertical scrollbar */
+  height: 8px; /* Height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0; /* Darker color on hover for the thumb */
+}

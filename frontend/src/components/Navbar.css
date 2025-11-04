@@ -1,0 +1,302 @@
+/* Navbar.css - Start */
+
+/* Define CSS variable for header height for consistent spacing */
+html {
+  --header-height: 60px; /* Default header height */
+}
+
+/* Fixed Top Header Bar */
+.top-navbar-header {
+  position: fixed; /* Keep it fixed at the top */
+  top: 0;
+  left: 0; /* Ensures it spans the full width */
+  width: 100%;
+  height: var(--header-height); /* Use the CSS variable for height */
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+  border-bottom: 1px solid #e0e0e0; /* Subtle bottom border for definition */
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the right (start in RTL) */
+  align-items: center;
+  padding: 0 1rem; /* Horizontal padding */
+  z-index: 1100; /* Higher z-index to be on top of other content */
+  direction: rtl; /* RTL for Hebrew */
+}
+
+.top-navbar-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  font-weight: 700;
+  margin: 0; /* Ensures no extra margin pushes it away from the button */
+}
+
+/* Modern Hamburger Icon Button */
+.top-navbar-toggle {
+  background: none; /* No background color */
+  border: none; /* No border */
+  cursor: pointer;
+  color: #3b82f6; /* Primary blue for hamburger icon */
+  display: flex;
+  flex-direction: column; /* Stack lines vertically */
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Adjusted width for a more compact button */
+  height: 50px; /* Adjusted height for a more compact button */
+  padding: 0; /* Remove internal padding */
+  border-radius: 50%; /* Make it a circular button */
+  transition: background-color 0.2s ease-in-out;
+  outline: none; /* Remove default focus outline */
+  position: relative; /* For positioning the lines */
+  z-index: 1; /* Ensure icon is above hover effect if any */
+  margin-left: 0.8rem; /* Space between the button and the title */
+  margin-right: 0.8rem;
+}
+
+.top-navbar-toggle:hover {
+  background-color: transparent !important; /* Ensure no background on hover */
+}
+
+/* Individual lines of the hamburger icon */
+.top-navbar-toggle-line {
+  display: block;
+  width: 30px; /* Reduced width of the hamburger lines */
+  height: 3px; /* Reduced thickness of the lines */
+  background-color: #3b82f6;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.top-navbar-toggle-line:nth-child(2) {
+  margin: 5px 0; /* Adjusted space between the lines */
+}
+
+/* Animation for when the drawer is open (controlled by JS adding 'open' class) */
+.top-navbar-toggle.open .top-navbar-toggle-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg); /* Adjusted transform for smaller icon */
+}
+
+.top-navbar-toggle.open .top-navbar-toggle-line:nth-child(2) {
+  opacity: 0; /* Hide the middle line */
+}
+
+.top-navbar-toggle.open .top-navbar-toggle-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg); /* Adjusted transform for smaller icon */
+}
+
+/* Drawer Overlay Menu */
+.top-navbar-drawer {
+  position: fixed;
+  top: 0; /* Align to the top of the viewport */
+  right: 0; /* Align to the right of the viewport */
+  width: 280px; /* Fixed width for the drawer */
+  max-height: 100vh; /* Allow full viewport height */
+  overflow-y: auto; /* Enable internal scrollbar if content exceeds height */
+  background-color: #ffffff00; /* White background for the drawer */
+  z-index: 1050; /* Between header and content */
+  transform: translateX(100%); /* Start off-screen to the right */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation */
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--header-height) + 20px); /* Space for the fixed header + extra padding */
+  direction: rtl; /* RTL for Hebrew */
+}
+
+.top-navbar-drawer.open {
+  transform: translateX(0); /* Slide into view */
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 0;
+}
+
+/* Individual navigation items within the drawer */
+.drawer-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Reduced gap for a more compact look */
+  width: 100%;
+  padding: 0.8rem 1.2rem; /* Reduced padding for a more compact item */
+  background-color: #ffffff; /* Default background */
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem; /* Slightly smaller font size for professionalism */
+  font-weight: 600; /* Less bold for a cleaner look */
+  color: #555;
+  text-align: right;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-right 0.2s ease-in-out;
+  outline: none;
+  border-right: 4px solid transparent; /* Subtle border for active/hover state on the right for RTL */
+  margin-bottom: 0.5rem; /* Reduced gap between items */
+  border-radius: 8px; /* Consistent rounded corners */
+}
+
+.drawer-nav-item:last-child {
+  margin-bottom: 0; /* No margin after the last item */
+}
+
+.drawer-nav-item:hover {
+  background-color: #f0f4f7 !important; /* Very light background on hover */
+  color: #2c3e50; /* Darker text on hover */
+  border-right: 4px solid #3b82f6; /* Primary blue border on the right for RTL */
+}
+
+.drawer-nav-item:active,
+.drawer-nav-item.active { /* Added .active class for current route */
+  background-color: #e6f0ff; /* Slightly more prominent background on active */
+  border-right: 4px solid #3b82f6; /* Keep border on active */
+  color: #3b82f6; /* Active text color */
+}
+
+.drawer-nav-item.active .drawer-nav-icon {
+  color: #3b82f6; /* Active icon color */
+}
+
+/* Icons within drawer navigation items */
+.drawer-nav-icon {
+  font-size: 1.2rem; /* Adjusted icon size to match smaller text */
+  color: var(--icon-color, #7f8c8d);
+  transition: color 0.2s ease-in-out;
+}
+
+.drawer-nav-item:hover .drawer-nav-icon {
+  color: #3b82f6; /* Icon color changes to primary blue on hover */
+}
+
+/* Overlay for when drawer is open */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 1000; /* Below drawer, above content */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive adjustments for Navbar */
+
+/* For screens up to 768px (e.g., tablets) */
+@media (max-width: 768px) {
+  html {
+    --header-height: 70px; /* Slightly increased header height for tablets */
+  }
+
+  .top-navbar-header {
+    height: var(--header-height);
+    padding: 0 1rem;
+  }
+
+  .top-navbar-title {
+    font-size: 1.4rem;
+  }
+
+  .top-navbar-toggle {
+    width: 55px; /* Adjusted size for tablet */
+    height: 55px; /* Adjusted size for tablet */
+    margin-left: 0.7rem;
+  }
+
+  .top-navbar-toggle-line {
+    width: 35px; /* Adjusted for tablet */
+    height: 3px; /* Adjusted for tablet */
+  }
+
+  .top-navbar-toggle.open .top-navbar-toggle-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .top-navbar-toggle.open .top-navbar-toggle-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .top-navbar-drawer {
+    padding-top: calc(var(--header-height) + 15px); /* Adjusted for tablet header height */
+    width: 220px; /* Slightly smaller drawer width for tablets */
+  }
+
+  .drawer-nav-item {
+    padding: 0.7rem 1rem; /* Further adjusted padding for tablets */
+    font-size: 0.9rem; /* Adjusted font size for tablets */
+    margin-bottom: 0.4rem;
+  }
+
+  .drawer-nav-icon {
+    font-size: 1.1rem; /* Adjusted icon size for tablets */
+  }
+}
+
+/* For screens up to 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+  html {
+    --header-height: 75px; /* Default header height for mobile */
+  }
+
+  .top-navbar-header {
+    height: var(--header-height);
+    padding: 0 1.2rem;
+  }
+
+  .top-navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+
+  .active-item-display svg {
+  width: 28px;
+  height: 28px;
+  }
+
+  .top-navbar-toggle {
+    width: 60px; /* Adjusted size for mobile */
+    height: 60px; /* Adjusted size for mobile */
+    margin-left: 1.5rem;
+  }
+
+  .top-navbar-toggle-line {
+    width: 25px; /* Adjusted for mobile */
+    height: 2px; /* Adjusted for mobile */
+  }
+
+  .top-navbar-toggle.open .top-navbar-toggle-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .top-navbar-toggle.open .top-navbar-toggle-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .top-navbar-drawer {
+    padding-top: calc(var(--header-height) + 10px); /* Adjusted for mobile header height */
+    width: 250px; /* Fixed width for smaller mobile screens */
+    border-bottom-left-radius: 8px; /* Remove rounded corners on very small screens for seamless edge */
+    display: flex;
+    align-items: center;
+  }
+
+  .drawer-nav-item {
+    padding: 0.6rem 0.9rem; /* Further adjusted padding for mobile */
+    font-size: 1.2rem; /* Adjusted font size for mobile */
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    
+  }
+
+  .drawer-nav-icon {
+    font-size: 1.8rem; /* Adjusted icon size for mobile */
+
+}
+}
+/* Navbar.css - End */

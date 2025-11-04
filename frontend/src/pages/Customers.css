@@ -1,0 +1,182 @@
+/* Customers.css */
+/* Styling for the Customers component with responsive design and action buttons */
+
+/* --- Container and Layout --- */
+.customers-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(130deg, #f0f7ffa4, #e3efffa8);
+  min-height: 100vh;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 3rem;
+  box-sizing: border-box;
+}
+
+.customers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 6rem auto;
+}
+
+/* --- Customer Card --- */
+.customer-card {
+  max-width: 300px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.customer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.customer-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Card Content --- */
+.customer-header {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.customer-info-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+  color: #555;
+  text-align: right;
+  gap: 6px;
+}
+
+.customer-description {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.6;
+  border-top: 1px dashed #eee;
+  padding-top: 15px;
+  text-align: right;
+}
+
+/* --- Action Buttons --- */
+.customer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  flex-wrap: wrap;
+  max-width: 300px;
+  margin: 0 auto 1rem;
+  border-top: 1px solid #eee;
+  background-color: transparent;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.action-icon {
+  width: 60px;
+  height: 60px;
+  font-size: 1.9rem;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon:hover {
+  transform: translateY(-2px);
+  background-color: transparent !important;
+}
+
+/* --- Button Colors --- */
+.action-icon.whatsapp {
+  background-color: #00ff5ebe !important;
+  color: black;
+}
+
+.action-icon.call {
+  background-color: #ffffff !important;
+  color: black;
+}
+
+.action-icon.waze {
+  background-color: #00a2ff9e !important;
+  color: black;
+}
+
+/* --- Responsive Styling --- */
+@media (max-width: 768px) {
+  .customers-container {
+    padding: 20px;
+  }
+
+  .customers-list {
+    grid-template-columns: 1fr;
+    margin: 3rem auto;
+  }
+
+  .customer-card,
+  .customer-actions {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .customer-header {
+    font-size: 1.4em;
+  }
+
+  .customer-info-icon {
+    font-size: 0.9em;
+  }
+
+  .action-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customers-container {
+    padding: 15px 1rem 0;
+  }
+
+  .customer-card {
+    padding: 18px;
+  }
+
+  .customer-header {
+    font-size: 1.2em;
+  }
+
+  .customer-info-icon {
+    font-size: 0.85em;
+  }
+
+  .action-icon {
+    font-size: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}

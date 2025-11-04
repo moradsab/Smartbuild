@@ -1,0 +1,68 @@
+/* Dashboard Container */
+.dashboard-container {
+  padding: 1rem 1rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgb(0 0 0 / 0.12);
+  direction: rtl;
+  font-family: 'Arial', sans-serif;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #111827;
+  text-align: right;
+}
+
+.dashboard-subtitle {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  text-align: right;
+}
+
+
+/* === Mobile Adjustments === */
+@media (max-width: 640px) {
+  .action-button {
+    width: 52px;
+    height: 52px;
+    padding: 0.4rem;
+  }
+
+  .action-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .action-button span {
+    font-size: 0.65rem;
+  }
+
+  .recent-projects-section {
+    height: 15rem;
+    padding: 0.75rem;
+  }
+
+  .projects-list {
+    max-height: 30rem;
+    padding-inline-end: 2px;
+  }
+
+  .project-card {
+    padding: 0.65rem;
+  }
+
+  .project-name {
+    font-size: 0.85rem;
+  }
+
+  .project-desc,
+  .project-info {
+    font-size: 0.7rem;
+  }
+}

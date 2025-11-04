@@ -1,0 +1,215 @@
+.recent-projects-section {
+  margin-top: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 0 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e0e6ed;
+}
+
+.recent-projects-title {
+  font-size: 1.9rem; /* Smaller title font */
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  font-weight: 700;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.project-card {
+  background-color: #fcfdfff5;
+  border-radius: 10px;
+  padding: 0.9rem;
+  border: 2px solid rgba(224, 230, 237, 0.6);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+}
+
+.project-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 0.6rem;
+}
+
+.project-id {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  background-color: rgba(240, 244, 247, 0.7);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+}
+
+.project-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.18rem 0.45rem;
+  border-radius: 3px;
+  color: #fff;
+  opacity: 0.9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.status-inprogress { background-color: rgba(60, 140, 250, 0.85); }
+.status-ordered    { background-color: rgba(255, 165, 0, 0.85); }
+.status-quoted     { background-color: rgba(46, 204, 113, 0.85); }
+.status-pending     { background-color: rgba(204, 46, 46, 0.85); }
+
+.project-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.project-desc {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 0.6rem;
+  flex-grow: 1;
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #555;
+  padding-top: 0.6rem;
+  border-top: 1px solid #f0f4f7;
+}
+
+.view-all-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.view-all-button {
+  background-color: transparent;
+  color: #3b82f6;
+  padding: 0.8rem 1.8rem;
+  border: 3px solid #9cb8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.view-all-button:hover {
+  background-color: transparent !important;
+  transform: translateY(-2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.005);
+}
+
+.view-all-icon {
+  font-size: 1.2rem;
+  color: inherit;
+}
+
+/* Responsive Layout */
+@media (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .recent-projects-section {
+    padding: 0 1rem 1rem 0.5rem;
+  }
+
+  .recent-projects-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .project-card {
+    padding: 0.8rem;
+  }
+
+  .project-name {
+    font-size: 1rem;
+  }
+
+  .project-desc {
+    font-size: 0.8rem;
+  }
+
+  .project-info {
+    font-size: 0.75rem;
+  }
+
+  .view-all-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recent-projects-section {
+    padding: 0.1rem;
+  }
+
+  .recent-projects-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+
+  .project-card {
+    padding: 0.7rem;
+  }
+
+  .project-id,
+  .project-status {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .project-name {
+    font-size: 0.95rem;
+  }
+
+  .project-desc {
+    font-size: 0.75rem;
+  }
+
+  .project-info {
+    font-size: 0.7rem;
+  }
+
+  .view-all-button {
+    width: 90%;
+    justify-content: center;
+    padding: 0.7rem 1.5rem;
+  }
+}
