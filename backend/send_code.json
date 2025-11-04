@@ -1,0 +1,221 @@
+{
+  "name": "send-code",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-code",
+        "responseMode": "lastNode",
+        "options": {
+          "allowedOrigins": "http://192.168.1.241:5173,http://localhost:5173,https://construct-smartco.web.app",
+          "rawBody": "={ \"status\": \"received\" }"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a1d3dd43-26d3-4a5f-8ab5-f71abc3b6967",
+      "name": "Get Phone Number",
+      "webhookId": "43e26ebd-2e33-498c-8902-ddcf5080e099"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const otp = Math.floor(1000 + Math.random() * 9000).toString();  // 4-digit OTP\nconst phone = $json.Phone;\n\nreturn (\n  {\n    json: {\n      phone,\n      otp,\n      message: `קוד האימות שלך הוא: ${otp}`,  // Hebrew: \"Your verification code is\"\n    }\n  }\n);\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "39bb792b-50f4-4a14-9418-90042f98b846",
+      "name": "Generate Code"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "677764232097420",
+        "recipientPhoneNumber": "={{ $('Get Phone Number').item.json.body.phone }}",
+        "textBody": "={{ $('Generate Code').item.json.message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        660,
+        0
+      ],
+      "id": "5c861715-8d56-4e49-b673-cb5d222a33fc",
+      "name": "Send Code",
+      "webhookId": "0daab751-8cd5-4fd8-a2ec-1749fa57162f",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "wqhGxjcxH9QnTHeR",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit?gid=2078673751#gid=2078673751",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2078673751,
+          "mode": "list",
+          "cachedResultName": "otp",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit#gid=2078673751"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $('Get Phone Number').item.json.body.phone.replace(/\\+/g, ''); }}",
+            "Token": "={{ $('Generate Code').item.json.otp }}",
+            "Expire": "={{Date.now() + 5 * 60 * 1000}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Token",
+              "displayName": "Token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expire",
+              "displayName": "Expire",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        440,
+        0
+      ],
+      "id": "64a14c32-ae31-4e37-bd22-1674a55fe33d",
+      "name": "Save Code",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Get Phone Number": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "connection": "keep-alive",
+            "content-length": "25",
+            "sec-ch-ua-platform": "\"Android\"",
+            "user-agent": "Mozilla/5.0 (Linux; Android 13; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36",
+            "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+            "content-type": "application/json",
+            "sec-ch-ua-mobile": "?1",
+            "accept": "*/*",
+            "origin": "http://localhost:5173",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-dest": "empty",
+            "referer": "http://localhost:5173/",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "he-IL,he;q=0.9,en-NL;q=0.8,en;q=0.7,en-US;q=0.6"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "phone": "+972524810945"
+          },
+          "webhookUrl": "http://localhost:5678/webhook/send-code",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Get Phone Number": {
+      "main": [
+        [
+          {
+            "node": "Generate Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Code": {
+      "main": [
+        [
+          {
+            "node": "Save Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Code": {
+      "main": [
+        [
+          {
+            "node": "Send Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7f08a06e-c742-4e15-9056-eb70ef9f2c2f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "cPidKJIdCLNG4ZG7",
+  "tags": [
+    {
+      "createdAt": "2025-07-18T21:58:27.583Z",
+      "updatedAt": "2025-07-18T21:58:27.583Z",
+      "id": "rQfTDXPlWCXEbpg5",
+      "name": "Construct"
+    }
+  ]
+}

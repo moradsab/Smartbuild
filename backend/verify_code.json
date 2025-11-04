@@ -1,0 +1,239 @@
+{
+  "name": "verify-code",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "verify-code",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "http://192.168.1.241:5173,http://localhost:5173"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -780,
+        80
+      ],
+      "id": "2f2a9fb3-e2e6-4e06-8f37-fe3990f3ae91",
+      "name": "Get Code",
+      "webhookId": "41de1745-13c8-44a7-9ea6-f5917d5bea7b"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit?gid=2078673751#gid=2078673751",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2078673751,
+          "mode": "list",
+          "cachedResultName": "otp",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit#gid=2078673751"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Phone",
+              "lookupValue": "={{ $json.body.phone.replace(/\\+/g, '')  }}"
+            }
+          ]
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -560,
+        80
+      ],
+      "id": "1b09a3a5-d28d-4023-a283-fae169c380ae",
+      "name": "Search User Code",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7999d8e5-1778-47fe-ae7c-eeaff61deb31",
+              "leftValue": "={{ $('Get Code').item.json.body.code }}",
+              "rightValue": "={{ $json.Token }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "17acb5cf-0efe-4834-910d-db6fe9b21928",
+              "leftValue": "={{$json.Expire.toDateTime() }}",
+              "rightValue": "={{ DateTime.now() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -340,
+        80
+      ],
+      "id": "5b572d05-1c3c-4b23-99cc-9b8554128517",
+      "name": "Verify Code"
+    },
+    {
+      "parameters": {
+        "claims": {
+          "expiresIn": "={{ 60*2 }}",
+          "jwtid": "={{ $json.Phone }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.jwt",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -20
+      ],
+      "id": "d36eab76-422a-4536-98ce-6440565ee38c",
+      "name": "Create Token",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        100,
+        -20
+      ],
+      "id": "60a75d47-c998-4e64-9dfd-560c1671f6dd",
+      "name": "Return Verified"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 401
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -120,
+        180
+      ],
+      "id": "7a18cee5-ebef-406c-9b52-03cebbea48ff",
+      "name": "Return Not Verified"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Code": {
+      "main": [
+        [
+          {
+            "node": "Search User Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search User Code": {
+      "main": [
+        [
+          {
+            "node": "Verify Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Code": {
+      "main": [
+        [
+          {
+            "node": "Create Token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Not Verified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Token": {
+      "main": [
+        [
+          {
+            "node": "Return Verified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0c390404-ce59-4fae-a7f3-8e33a86d2100",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "859oZuhWBVUx9Nh0",
+  "tags": [
+    {
+      "createdAt": "2025-07-18T21:58:27.583Z",
+      "updatedAt": "2025-07-18T21:58:27.583Z",
+      "id": "rQfTDXPlWCXEbpg5",
+      "name": "Construct"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "name": "transcribe-recording",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transcribe-recording",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d0c410f5-5799-42d4-9108-51154298451b",
+      "name": "Webhook",
+      "webhookId": "3be04d82-0a2c-43f2-881c-ce6ffb1e28de",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "binaryPropertyName": "audio",
+        "options": {
+          "language": "He"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        220,
+        0
+      ],
+      "id": "64751543-4d9c-4f0a-aea3-3ad57818f027",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"text\": \"{{ $json.text }}\"\n}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        420,
+        0
+      ],
+      "id": "9ef144d4-2f25-4207-afc9-cf888a01d4f4",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "03a66fc5-5b06-4534-93b2-991f842e9066",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "e51fRcfUn0R1k2xh",
+  "tags": []
+}

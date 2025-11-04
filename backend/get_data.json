@@ -1,0 +1,345 @@
+{
+  "name": "get-data",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "get-data",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -600,
+        120
+      ],
+      "id": "48a80307-94af-4f77-ad8e-b82d8efb5236",
+      "name": "Webhook",
+      "webhookId": "d817778b-1b07-4263-b0b0-69af858d9321",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "users",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "phone",
+              "lookupValue": "={{ $json.jwtPayload.jwtid }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -380,
+        120
+      ],
+      "id": "bd551cac-673c-4eb6-91ad-d85550989b45",
+      "name": "Get User",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "מאזן",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -160,
+        -180
+      ],
+      "id": "dbee2f0f-984d-4c0c-b084-0c03310e18bd",
+      "name": "Get Stats",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get User').item.json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "פרויקטים",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M3szV72_UYlIoXQ8ukvn-ejzCBhoIv8zQRLDdApydvk/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -160,
+        20
+      ],
+      "id": "5524394a-0548-40b2-86fe-625dd2446e64",
+      "name": "Get Recent Projects",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get User').first().json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "ביקורים",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -160,
+        420
+      ],
+      "id": "dfd68191-c6f9-4cf0-ba1d-d83e6c9cab24",
+      "name": "Get Visits",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get User').first().json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "פניות",
+          "mode": "name"
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -160,
+        220
+      ],
+      "id": "8ae426e9-7e00-40bc-8184-9a492e679dad",
+      "name": "Get Customers",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        60,
+        99
+      ],
+      "id": "a0d33157-3e10-46e1-93de-34280009b356",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        500,
+        120
+      ],
+      "id": "eaa349f6-c6fa-4ecb-a8d5-6990874b24cd",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const stats = $('Get Stats').first().json;\nconst projects = $('Get Recent Projects').all().map(item => ({ ...item.json }));\nconst customers = $('Get Customers').all().map(item => ({ ...item.json }));\nconst visits = $('Get Visits').all().map(item => ({ ...item.json }));\n\nreturn [\n  {\n    json: {\n      stats,\n      projects,\n      customers,\n      visits\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        120
+      ],
+      "id": "eb48e4b4-28a3-422f-93ca-e6d7b075dc8c",
+      "name": "Json"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User": {
+      "main": [
+        [
+          {
+            "node": "Get Stats",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Recent Projects",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Customers",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Visits",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stats": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Projects": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Visits": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Get Customers": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Json": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f194bcee-4ba3-4524-8161-8e10a207563b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "EUM9aq66a225cmkG",
+  "tags": []
+}

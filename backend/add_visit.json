@@ -1,0 +1,1263 @@
+{
+  "name": "add-visit",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "add-visit",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1800,
+        20
+      ],
+      "id": "b5dcc334-4efa-4f28-9d6e-ae0a7830ffab",
+      "name": "Webhook",
+      "webhookId": "754a405e-7dcf-492b-9f61-9e2668ae1d28",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').first().json.spreadsheetId }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "פריטים",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "אורך",
+              "displayName": "אורך",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "רוחב",
+              "displayName": "רוחב",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "גובה",
+              "displayName": "גובה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תמונה",
+              "displayName": "תמונה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2460,
+        60
+      ],
+      "id": "64e1fe23-0270-45e7-8dc7-3e8189670a27",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        4520,
+        40
+      ],
+      "id": "5be790d0-20e6-4fc4-bce6-cf37f3bb2cdf",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $json.nextFileNumber }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Search files and folders1').first().json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -500,
+        20
+      ],
+      "id": "14a4a61f-c6cc-4047-b1e5-f167a4026206",
+      "name": "Create folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.jwtPayload.jwtid.replace(/^972/, \"0\"); }}",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/1M5M1z1mr0tkPA3xJedwiF1KVC9kivCjv",
+            "mode": "url"
+          },
+          "whatToSearch": "folders"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1400,
+        20
+      ],
+      "id": "bacea256-10b0-4fc3-8c4e-afc6f7f3e671",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "ביקורים",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1180,
+        20
+      ],
+      "id": "10ab4635-eda8-49d5-9b40-b7ba98d4c88c",
+      "name": "Search files and folders1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -980,
+        20
+      ],
+      "id": "00d99163-879c-4f38-b3ed-16563c1e2c3a",
+      "name": "Search files and folders2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all file names\nconst files = items.map(item => item.json.name);\n\n// Extract numeric names and find max\nlet maxNum = 0;\nfiles.forEach(name => {\n  const num = parseInt(name, 10);\n  if (!isNaN(num) && num > maxNum) {\n    maxNum = num;\n  }\n});\n\nreturn [\n  {\n    json: {\n      nextFileNumber: maxNum + 1\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -760,
+        20
+      ],
+      "id": "00b19294-d4db-494f-acb8-9cae3071031c",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "נתונים",
+        "sheetsUi": {
+          "sheetValues": [
+            {
+              "title": "כללי"
+            },
+            {
+              "title": "פריטים"
+            }
+          ]
+        },
+        "options": {
+          "locale": "iw_IL"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "219fead4-3689-43c0-8501-03a5bd3207df",
+      "name": "Create spreadsheet",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "תמונות",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -280,
+        20
+      ],
+      "id": "ceaed90f-5b3b-4cc6-9809-6d94a70f6f41",
+      "name": "Create folder1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const binaries = $('Webhook').first().binary;  // Get binary object from the first item\nconst output = [];\n\nfor (const [key, value] of Object.entries(binaries || {})) {\n  output.push({\n    binary: {\n      // use the original key name for the binary property\n      data: {\n        ...value,\n        // set the fileName property so n8n recognizes it\n        fileName: `${key}.jpg`\n      }\n    },\n    json: {\n      fileName: `${key}.jpg`\n    }\n  });\n}\n\nreturn output;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        40
+      ],
+      "id": "4bc4aaf4-ad1e-4e71-a8db-1b9dc3e25e59",
+      "name": "Code1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder1').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        40
+      ],
+      "id": "331de06a-a38d-454c-8188-4a0bd86031de",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "פריטים",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "אורך",
+              "displayName": "אורך",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "רוחב",
+              "displayName": "רוחב",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "גובה",
+              "displayName": "גובה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תמונה",
+              "displayName": "תמונה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        660,
+        40
+      ],
+      "id": "f0e122ba-4baa-45ed-a6ab-d2002ac2d0cc",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      אורך: \"\",\n      רוחב: \"\",\n      גובה: \"\",\n      תמונה: \"\",\n      תיאור: \"\"\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        60
+      ],
+      "id": "70233da6-f705-4b30-8950-0851557e853f",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "כללי",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם לקוח",
+              "displayName": "שם לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "סוג לקוח",
+              "displayName": "סוג לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "טלפון",
+              "displayName": "טלפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תאריך ביקור",
+              "displayName": "תאריך ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "מספר פריטים",
+              "displayName": "מספר פריטים",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "הצעת מחיר",
+              "displayName": "הצעת מחיר",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "הצעת מחיר נשלחה",
+              "displayName": "הצעת מחיר נשלחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1080,
+        20
+      ],
+      "id": "0ca5386f-2d3c-4f45-a4f8-4cc3572014d8",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      \"שם לקוח\": \"\",\n      \"סוג לקוח\": \"\",\n      \"טלפון\": \"\",\n      \"תאריך ביקור\": \"\",\n      \"תיאור\": \"\",\n      \"מספר פריטים\": \"\",\n      \"הצעת מחיר\": \"\",\n      \"הצעת מחיר נשלחה\": \"\"\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        40
+      ],
+      "id": "0c2be0d7-8857-438a-9f66-75f8d00fef73",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').first().json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').first().json.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1280,
+        20
+      ],
+      "id": "1ec338af-6e24-47d8-a197-40112e81c21a",
+      "name": "Move file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const webhookItems = $('Webhook').all();  // All webhook items\nconst driveFiles = $('Upload file1').all().map(item => item.json);  // All drive files\n\nconst outputItems = [];\n\nfor (const webhookItem of webhookItems) {\n  const body = webhookItem.json.body;\n\n  // Find all photo indices by scanning keys like \"photo_0_description\"\n  const photoIndices = Object.keys(body)\n    .map(key => {\n      const m = key.match(/^photo_(\\d+)_description$/);\n      return m ? parseInt(m[1], 10) : null;\n    })\n    .filter(x => x !== null);\n\n  for (const index of photoIndices) {\n    // Find drive file matching current photo index\n    const file = driveFiles.find(f =>\n      f.name === `photo_${index}.jpg` || f.name === `photo_${index}.png`\n    );\n\n    outputItems.push({\n      json: {\n        \"תיאור\": body[`photo_${index}_description`] || '',\n        \"גובה\": body[`photo_${index}_height`] || '',\n        \"רוחב\": body[`photo_${index}_width`] || '',\n        \"אורך\": body[`photo_${index}_length`] || '',\n        \"תמונה\": file ? file.webViewLink || '' : ''  // Correct mapping from driveFiles\n      }\n    });\n  }\n}\n\nreturn outputItems;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        60
+      ],
+      "id": "187de5bc-e400-40bf-87bb-89292742e7b7",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "jsCode": "const webhookItems = $('Webhook').all();\n\nfunction getTodayDate() {\n  const d = new Date();\n  const yyyy = d.getFullYear();\n  const mm = String(d.getMonth() + 1).padStart(2, '0');\n  const dd = String(d.getDate()).padStart(2, '0');\n  return `${yyyy}-${mm}-${dd}`;\n}\n\nconst output = webhookItems.map(item => {\n  const body = item.json.body;\n\n  // Count items where photo description exists and is not empty\n  const itemCount = Object.keys(body)\n    .filter(key => key.startsWith('photo_') && key.endsWith('_description') && body[key].trim() !== '')\n    .length;\n\n  return {\n    json: {\n      \"שם לקוח\": body.name || '',\n      \"כתובת\": body.address || '',\n      \"סוג לקוח\": body.type || '',\n      \"טלפון\": body.phone || '',\n      \"תיאור\": body.projectDescription || '',\n      \"תאריך ביקור\": getTodayDate(),\n      \"מספר פריטים\": itemCount\n    }\n  };\n});\n\nreturn output;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2660,
+        60
+      ],
+      "id": "0809ceb2-606f-4843-b8a7-d11b24c09e9c",
+      "name": "Code5"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Move file').first().json.id }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "כללי",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם לקוח",
+              "displayName": "שם לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "סוג לקוח",
+              "displayName": "סוג לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "טלפון",
+              "displayName": "טלפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "תאריך ביקור",
+              "displayName": "תאריך ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "מספר פריטים",
+              "displayName": "מספר פריטים",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "הצעת מחיר",
+              "displayName": "הצעת מחיר",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "הצעת מחיר נשלחה",
+              "displayName": "הצעת מחיר נשלחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2860,
+        60
+      ],
+      "id": "137c57a3-eb3d-4e2e-8fd3-152ac0d17abc",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "דף הבית",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('Search files and folders').first().json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3080,
+        60
+      ],
+      "id": "a44107a4-6ce3-4593-8e64-f76594e3d81b",
+      "name": "Search files and folders3",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return{\n  json: {\n    ...$('Code5').first().json,\n    ביקור: $('Move file').first().json.id\n  }\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3280,
+        60
+      ],
+      "id": "e1a0af83-ecf2-43a6-8913-bfaf8c78fcb3",
+      "name": "Code6"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Search files and folders3').item.json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "ביקורים",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם לקוח",
+              "displayName": "שם לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "סוג לקוח",
+              "displayName": "סוג לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "טלפון",
+              "displayName": "טלפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תאריך ביקור",
+              "displayName": "תאריך ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "כתובת",
+              "displayName": "כתובת",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "מספר פריטים",
+              "displayName": "מספר פריטים",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "הצעת מחיר",
+              "displayName": "הצעת מחיר",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "הצעת מחיר נשלחה",
+              "displayName": "הצעת מחיר נשלחה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ביקור",
+              "displayName": "ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        3500,
+        60
+      ],
+      "id": "acd50674-e0c2-4a87-92bb-358525fed120",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2020,
+        20
+      ],
+      "id": "7c50bf7b-d445-46bd-b0a9-aa12f95b8cda",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create folder": {
+      "main": [
+        [
+          {
+            "node": "Create folder1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders1": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Create folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create folder1": {
+      "main": [
+        [
+          {
+            "node": "Create spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file1": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Move file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move file": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code5": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders3": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4acd8e39-12fb-438b-a898-fda85c37ed73",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "8CjCSebOmIGFNplh",
+  "tags": []
+}

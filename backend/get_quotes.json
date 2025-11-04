@@ -1,0 +1,159 @@
+{
+  "name": "get-quotes",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "get-quotes",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "73ceddc8-9315-48c6-862b-9e0cc5fddce4",
+      "name": "Webhook",
+      "webhookId": "429f5eb1-11d3-4d4e-af9b-68cab69b9ef2",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        820,
+        0
+      ],
+      "id": "e6058a7d-9c93-4180-950f-5953228e7071",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "users",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "phone",
+              "lookupValue": "={{ $json.jwtPayload.jwtid }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        220,
+        0
+      ],
+      "id": "81275a36-546b-41d4-9a28-f89a7f0d682a",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1636406338,
+          "mode": "list",
+          "cachedResultName": "הצעות",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M3szV72_UYlIoXQ8ukvn-ejzCBhoIv8zQRLDdApydvk/edit#gid=1636406338"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        440,
+        0
+      ],
+      "id": "3ce53d73-d270-4e7d-b63c-419b860737f5",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0ef369d8-798d-4c3c-a7a6-44039f858072",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "NqK1xO3AWPzMFfDY",
+  "tags": []
+}

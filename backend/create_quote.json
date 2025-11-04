@@ -1,0 +1,1356 @@
+{
+  "name": "create-quote",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "create-quote",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -920,
+        -360
+      ],
+      "id": "ea2e5c58-1e19-4a7b-983d-40a472029cb0",
+      "name": "Webhook",
+      "webhookId": "125df232-6201-496d-83af-aa8a5c43456c",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = items[0].json.body;\n\nconst output = {\n  \"לקוח\": {\n    \"שם\": data.client.name,\n    \"טלפון\": data.client.phone,\n    \"כתובת\": data.client.address,\n    \"תיאור פרויקט\": data.client.description,\n  },\n  \"פריטים\": data.items.map((item) => ({\n    \"שם\": item.name,\n    \"כמות\": item.quantity,\n    \"מחיר\": item.price,\n    \"תיאור פריט\": item.description,\n  })),\n  \"פריטי ביקור\": data.visitItems.map((vItem) => ({\n    \"מספר פריט\": vItem.row_number,\n    \"תיאור פריט\": vItem.תיאור,\n    \"אורך\": vItem.אורך,\n    \"רוחב\": vItem.רוחב,\n    \"גובה\": vItem.גובה,\n  })),\n};\n\nreturn [{ json: output }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -740,
+        160
+      ],
+      "id": "45645d8c-3041-4a01-9253-fff3dde4cdd0",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Example input for carpentry and plumbing project\nconst data = {\n  client: {\n    name: \"חברת בניין ודיור בע\\\"מ\",\n    phone: \"03-9876543\",\n    address: \"אתר בנייה - פרויקט מגדלי פארק, ראשון לציון\",\n    description: \"ביצוע עבודות נגרות ואינסטלציה במתחם מגורים יוקרתי בן 10 קומות, כולל דירות, לובי וחדרי מכונות\"\n  },\n  items: [\n    {\n      name: \"ארונות מטבח מעוצבים בהתאמה אישית\",\n      quantity: \"15\",\n      price: \"7500\",\n      description: \"ארונות מטבח מעץ סנדוויץ' איכותי, חזיתות MDF בציפוי אפוקסי, פרזול בלום, כולל התקנה מלאה\"\n    },\n    {\n      name: \"שיש קוורץ למטבחים\",\n      quantity: \"15\",\n      price: \"4200\",\n      description: \"משטחי שיש קוורץ בעובי 2 ס\\\"מ כולל חיפוי קיר והתקנה\"\n    },\n    {\n      name: \"מערכת אינסטלציה ראשית לדירות\",\n      quantity: \"10\",\n      price: \"13500\",\n      description: \"התקנת צנרת מים חמים/קרים מסוג SP, התקנת קולטי ביוב וחיבורים למערכת הראשית\"\n    },\n    {\n      name: \"התקנת מכלי הדחה סמויים\",\n      quantity: \"25\",\n      price: \"980\",\n      description: \"מכלי הדחה סמויים למערכות סניטציה בחדרי רחצה, כולל חיפוי והתקנה\"\n    },\n    {\n      name: \"ארונות אמבטיה בהתאמה אישית\",\n      quantity: \"25\",\n      price: \"3100\",\n      description: \"ארונות אמבטיה מעץ סנדוויץ', חזיתות פורניר, משטח חרס אינטגרלי וברזי ניקל\"\n    }\n  ],\n  visitItems: [\n    {\n      row_number: 1,\n      תיאור: \"מדידת פתחים להתקנת ארונות מטבח בקומות 1-3\",\n      אורך: \"420\",\n      רוחב: \"300\",\n      גובה: \"260\"\n    },\n    {\n      row_number: 2,\n      תיאור: \"בדיקת הכנות אינסטלציה לחדרי רחצה בקומות 4-6\",\n      אורך: \"150\",\n      רוחב: \"180\",\n      גובה: \"250\"\n    },\n    {\n      row_number: 3,\n      תיאור: \"מדידת לובי ראשי עבור חיפוי עץ ונגרות מעוצבת\",\n      אורך: \"800\",\n      רוחב: \"600\",\n      גובה: \"350\"\n    },\n    {\n      row_number: 4,\n      תיאור: \"בדיקת תוואי צנרת ראשית בחדרי מכונות\",\n      אורך: \"1200\",\n      רוחב: \"500\",\n      גובה: \"280\"\n    }\n  ]\n};\n\nconst output = {\n  \"לקוח\": {\n    \"שם\": data.client.name,\n    \"טלפון\": data.client.phone,\n    \"כתובת\": data.client.address,\n    \"תיאור פרויקט\": data.client.description,\n  },\n  \"פריטים\": data.items.map((item) => ({\n    \"שם\": item.name,\n    \"כמות\": item.quantity,\n    \"מחיר\": item.price,\n    \"תיאור פריט\": item.description,\n  })),\n  \"פריטי ביקור\": data.visitItems.map((vItem) => ({\n    \"מספר פריט\": vItem.row_number,\n    \"תיאור פריט\": vItem.תיאור,\n    \"אורך\": vItem.אורך,\n    \"רוחב\": vItem.רוחב,\n    \"גובה\": vItem.גובה,\n  })),\n};\n\nreturn [{ json: output }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        -220
+      ],
+      "id": "2d1c8086-417b-42e3-b699-f5c23a70b3da",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "text-embedding-3-large"
+            },
+            {
+              "name": "input",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        260
+      ],
+      "id": "75cb4670-6148-41a3-a4ef-d6f97664dac1",
+      "name": "HTTP Request",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const client = $json[\"לקוח\"];\nconst items = $json[\"פריטים\"];\n\nlet text = `לקוח: ${client[\"שם\"]} ${client[\"כתובת\"]}. ${client[\"תיאור פרויקט\"]}. `;\ntext += `פריטים: ${items.map(p => `${p[\"שם\"]} - ${p[\"תיאור פריט\"]}`).join(\", \")}`;\n\nreturn [{ json: { text } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -460,
+        600
+      ],
+      "id": "d54372d8-1a30-4ff7-a342-924b02cae12c",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1400,
+        1140
+      ],
+      "id": "c9b91e50-5082-48b6-a040-46b34632a728",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        820
+      ],
+      "id": "929f05bc-c723-4a6a-bbbb-1538ea4ed63f",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        920,
+        640
+      ],
+      "id": "02361c45-21c5-49b8-a5b2-c088684787c0",
+      "name": "Insert Data to Store",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        1820,
+        860
+      ],
+      "id": "f4dc0553-025c-4a92-9964-3dd64d502106",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "אתה מומחה בכיר בתחום הבנייה.\n\nקיבלת נתוני פרויקט מוטמעים (embedding) כמקור לשאילתא.\n\nהמשימה שלך בשלב זה היא:\n\n- לבצע חיפוש וקטורי במאגר הצעות המחיר ההיסטוריות באמצעות נתוני ההטמעה שקיבלת.\n- להתמקד בדמיון בפרטי הפריטים שבפרויקט: תיאורים, כמויות וסוגים.\n- לשקול דמיון בעלויות ומחירים של הפריטים והפרויקט הכולל.\n- להתחשב בפרטי הפרויקט הכלליים: היקף עבודה, מיקום, תיאורי ביצוע.\n\n- שלוף את חמש ההצעות ההיסטוריות הדומות ביותר לפי הקריטריונים.\n- החזר את התוצאות כטקסט מלא או סיכום שלהם, לשימוש בשלב הבא.\n\nהוראות כלליות:\n- השתמש ב-tool: vector_store במצב operation_mode: retrieve.\n- בקש top_k=5.\n- אל תעשה עיבוד נוסף.\n\nאנא החזר את חמש ההצעות הדומות ביותר בהתאם לקריטריונים.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1820,
+        640
+      ],
+      "id": "da04e619-891a-4764-aa86-e587300c34b1",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1600,
+        860
+      ],
+      "id": "3e455097-de4a-45ef-88c8-1bcc4a706542",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=אתה מומחה בכיר ומנוסה בתחום הבנייה, בעל ידע נרחב בתקנים ישראליים, נהלים מקובלים וניסוח הצעות מחיר ללקוחות עסקיים ופרטיים.\n\nקיבלת את הנתונים הבאים:\n1. פרטי פרויקט חדש (בפורמט JSON מלא ומדויק):\n{{ $('Code2').first().json.text }}\n\n2. חמש הצעות מחיר היסטוריות דומות שנשלפו ממאגר הנתונים:\n{{ $json.output }}\n\nהמטרה שלך:\n- ליצור הצעת מחיר חדשה, מלאה ומקצועית עבור הפרויקט הנוכחי, ברמה הגבוהה ביותר המקובלת בענף הבנייה.\n- לשמור על מבנה ותבנית כתיבה התואמים להצעות המחיר ההיסטוריות, כדי לשמר אחידות סגנונית.\n- לנסח את ההצעה בשפה מקצועית, מכבדת וברורה ללקוח, עם הקפדה על תקני התעשייה, קודים רגולטוריים, נהלים מקובלים בישראל ואמות מידה משפטיות מקובלות.\n\nבמהלך כתיבת ההצעה עליך לכלול:\n1. פרטי לקוח, תיאור כללי של הפרויקט ותחומי העבודה.\n2. תיאור מפורט של כל פריט, כולל:\n   - היקף העבודה\n   - מפרט חומרים מלא (סוגי חומרים, איכות, יצרנים במידת הצורך)\n   - שיטות התקנה וביצוע בהתאם לסטנדרטים הנהוגים\n   - דרישות תקן ישראלי רלוונטיות (כגון ת\"י) או תקנים בינלאומיים במקרה הצורך\n   - שלבי הכנה מקדימים לביצוע העבודה\n   - פעולות ניקיון, גימור וסגירת אתר לאחר ההתקנה\n3. התייחסות לתמחור:\n   - עלות לכל פריט עם הסבר על מה היא כוללת\n   - סכום כולל ומע\"מ כחוק\n   - הערות לגבי תנאי תשלום (למשל מקדמות, שלבי תשלום לפי התקדמות)\n4. סעיפי אחריות וביטוחים הנדרשים.\n5. תאריך אחרון לתוקף ההצעה.\n\nהוראות חשובות:\n- הניסוח חייב להיות מקצועי ואחיד, בדומה להצעות המחיר ההיסטוריות שסיפקתי לך.\n- השתמש בניסוח שמכבד את הלקוח אך מייצג גם את המקצועיות של העסק.\n- אל תדלג על סעיפים חשובים המקובלים בהצעות מחיר בענף הבנייה.\n- שמור על סדר לוגי ברור של חלקי ההצעה כדי שהיא תהיה קריאה ומובנת.\n\nהפלט הסופי:\n- החזר הצעת מחיר מלאה בעברית תקינה ומכובדת, מוכנה לשליחה ללקוח.\n- אין צורך להחזיר בפורמט JSON, אלא בטקסט מובנה וברור.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2180,
+        640
+      ],
+      "id": "1671ed10-92a9-4acf-b7fd-44117d2a2352",
+      "name": "AI Agent1",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2220,
+        860
+      ],
+      "id": "eec98d32-ae14-45f2-bb30-7c9987213ec5",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oGqt_bZ_eb1OgeqHsH-abGF_0HXxKD3kUDcBX11VlBk/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "users",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "phone",
+              "lookupValue": "={{ $json.jwtPayload.jwtid }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -640,
+        -400
+      ],
+      "id": "02f19907-16b9-45af-b816-b7c736c1addf",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get row(s) in sheet').first().json.sheet }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "הצעות",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "שם לקוח": "={{ $('Webhook').item.json.body.client.name }}",
+            "סוג לקוח": "=",
+            "טלפון": "={{ $('Webhook').item.json.body.client.phone }}",
+            "כתובת": "={{ $('Webhook').item.json.body.client.address }}",
+            "תיאור": "={{ $('Webhook').item.json.body.client.description }}",
+            "סטטוס": "בעריכה"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם לקוח",
+              "displayName": "שם לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "סוג לקוח",
+              "displayName": "סוג לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "טלפון",
+              "displayName": "טלפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "כתובת",
+              "displayName": "כתובת",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תאריך ביקור",
+              "displayName": "תאריך ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "סטטוס",
+              "displayName": "סטטוס",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "הצעה",
+              "displayName": "הצעה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ביקור",
+              "displayName": "ביקור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "לקוח",
+              "displayName": "לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2400,
+        -400
+      ],
+      "id": "8437168b-08e4-4011-87f3-74b6aabc3b97",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "={{\"הצעה_\" + $json.nextField }}",
+        "sheetsUi": {
+          "sheetValues": [
+            {
+              "title": "פריטים"
+            },
+            {
+              "title": "הצעה"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        560,
+        -400
+      ],
+      "id": "71590572-9a03-4bed-8ccf-b25a721da116",
+      "name": "Create spreadsheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "הצעות",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.drive }}",
+            "mode": "url"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -200,
+        -400
+      ],
+      "id": "ba8c7ec3-dd70-42ce-955d-1ed99ea3310c",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        20,
+        -400
+      ],
+      "id": "d2718423-b9d5-4a63-bb3a-d630439d54c5",
+      "name": "Search files and folders1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  nextField: $input.all().length\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -400
+      ],
+      "id": "0e88e3c5-e1d5-41cc-974c-5165ca1fa348",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  \"תיאור\": \"\",\n  \"אורך\": \"\",\n  \"רוחב\": \"\",\n  \"גובה\": \"\"\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        -580
+      ],
+      "id": "5471fced-f018-4175-8ebb-b1692ca4dcc5",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').item.json.spreadsheetUrl }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "פריטים",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "אורך",
+              "displayName": "אורך",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "רוחב",
+              "displayName": "רוחב",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "גובה",
+              "displayName": "גובה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        820,
+        -620
+      ],
+      "id": "13e2d579-cf73-4688-af91-fa818db9de25",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "פריטים",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "שם",
+              "displayName": "שם",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "כמות",
+              "displayName": "כמות",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "מחיר",
+              "displayName": "מחיר",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1500,
+        -400
+      ],
+      "id": "eaed79f4-f980-4c2e-830b-03ca5ce53545",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// קבלת הנתונים מה-Webhook\nconst data = $('Webhook').first().json.body;\n\n// ממפה רק את הפריטים (items)\nconst projectItems = data.items.map((item) => ({\n  \"שם\": item.name,\n  \"כמות\": item.quantity,\n  \"מחיר\": item.price,\n  \"תיאור\": item.description\n}));\n\n// החזרת הפלט כ-JSON\nreturn projectItems.map(p => ({ json: p }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        -400
+      ],
+      "id": "8bfcccce-290b-4e37-87f4-51ed9754b3a7",
+      "name": "Code5"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Search files and folders').first().json.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1720,
+        -400
+      ],
+      "id": "b34e1552-46cc-4871-b42a-cea9c99860c4",
+      "name": "Move file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// קבלת המידע מה-Webhook\nconst data =$('Webhook').first().json.body ;\n\n// יצירת אובייקט JSON עם המפתחות בעברית\nconst output = {\n  \"שם לקוח\": data.client.name || \"\",\n  \"סוג לקוח\": data.client.type || \"\",   // במידה ויש סוג לקוח, אחרת יישאר ריק\n  \"טלפון\": data.client.phone || \"\",\n  \"כתובת\": data.client.address || \"\",\n  \"תיאור\": data.client.description || \"\",\n  \"תאריך ביקור\": data.client.visitDate || \"\",  // במידה ויש שדה תאריך ביקור\n  \"סטטוס\": \"בעריכה\",           // אם יש סטטוס בפרויקט\n  \n  \"הצעה\": $('Create spreadsheet').first().json.spreadsheetId || \"\"             // מזהה או שם ההצעה\n};\n\n// מחזיר כתוצאה ב-n8n\nreturn [{ json: output }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        -400
+      ],
+      "id": "8f95233e-5519-472c-910f-38057c27bd81",
+      "name": "Code6"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -60,
+        -20
+      ],
+      "id": "d95a0ada-d9b6-4ca1-b076-19cef9902dd0",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.quotesHistory }}",
+            "mode": "url"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -340,
+        -100
+      ],
+      "id": "48bc9a7c-cbd9-4ea3-929b-735d6fa0bb4c",
+      "name": "Search files and folders2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wDnzrOKYi3aRciSH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1380,
+        340
+      ],
+      "id": "b5af1c07-0deb-4a41-bcba-9a4ba56a5114",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=אתה משמש כיועץ מומחה בתחום הבנייה בישראל. קיבלת הצעת מחיר מקבלן לביצוע פרויקט בנייה או שיפוץ.\nאנא נתח את ההצעה לפי הסעיפים הבאים בפסקה קצרה מאוד (3–4 שורות לכל היותר), בדיוק ולעניין, ללא חזרות, הקדמות או הרחבות מיותרות:\n\n📌 חלק א': הבנת ההצעה\n\nמה סוג והיקף הפרויקט?\n\nהאם יש פירוט של שלבים, כמויות, ולו\"ז ברור?\n\n📌 חלק ב': בדיקת מקצועיות\n\nהאם המחירים תואמים למחירי השוק?\n\nהאם יש סעיפים חסרים או תנאים שדורשים שיפור?\n\n📌 חלק ג': המלצות לסיום\n\nאילו סעיפים חשוב להבהיר או לדרוש?\n\nהאם ניתן לחתום כפי שזה או שצריך הצעות נוספות?\n\nסכם הכל בפסקה קצרה מאוד אחת (אורך מרבי – 3–4 שורות).\n\n\nאל תכתוב חלקים פסקה אחת קצרה\nההצעה - \n {{ $json.output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        180
+      ],
+      "id": "07d1fa16-beda-40e0-a133-48748a8d51e0",
+      "name": "AI Agent2",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "chatgpt-4o-latest",
+          "mode": "list",
+          "cachedResultName": "chatgpt-4o-latest"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2640,
+        400
+      ],
+      "id": "26fcc032-2ce1-464d-a304-07c1f4cb6c37",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "e2gSKz5CAp9rQ4MK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3140,
+        20
+      ],
+      "id": "67051111-4c85-4784-903d-fdbd610d5693",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Create spreadsheet').first().json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "הצעה",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "הצעה",
+              "displayName": "הצעה",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "שיפור",
+              "displayName": "שיפור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        3680,
+        20
+      ],
+      "id": "982da7de-d16c-408b-8dee-d1c9eda9bb63",
+      "name": "Append row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  \"הצעה\": $('AI Agent1').first().json.output ,\n  \"שיפור\": $('AI Agent2').first().json.output\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        20
+      ],
+      "id": "c53dc0e5-1c22-4e6a-b07d-ce6d882acc7a",
+      "name": "Code7"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"quote\": \n} {{ $('Create spreadsheet').first().json.spreadsheetId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        3900,
+        20
+      ],
+      "id": "9d10d831-e0dc-412f-bd2f-ac172ced1ff7",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Search files and folders2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Code5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders1": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Create spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Move file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code5": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move file": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders2": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Data to Store": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Code7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code7": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d55a20d2-5a7c-4d63-a588-26f9ae396f9c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "mhQ8Fp07wHvk1aVZ",
+  "tags": []
+}

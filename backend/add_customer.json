@@ -1,0 +1,187 @@
+{
+  "name": "add-customer",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "add-customer",
+        "authentication": "jwtAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "67e3153e-30c1-4197-98ac-7e66d829b69c",
+      "name": "Webhook",
+      "webhookId": "754a405e-7dcf-492b-9f61-9e2668ae1d28",
+      "credentials": {
+        "jwtAuth": {
+          "id": "M1b9bXErsWA8CWPu",
+          "name": "Morad JWT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1M3szV72_UYlIoXQ8ukvn-ejzCBhoIv8zQRLDdApydvk/edit?gid=1670965178#gid=1670965178",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1670965178,
+          "mode": "list",
+          "cachedResultName": "פניות",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M3szV72_UYlIoXQ8ukvn-ejzCBhoIv8zQRLDdApydvk/edit#gid=1670965178"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "טלפון": "={{ $json.body.phone }}",
+            "שם": "={{ $json.body.name }}",
+            "סוג לקוח": "={{ $json.body.type }}",
+            "כתובת": "={{ $json.body.location }}",
+            "תאריך": "={{ $json.body.visitDate }}",
+            "תיאור": "={{ $json.body.projectDescription }}"
+          },
+          "matchingColumns": [
+            "טלפון"
+          ],
+          "schema": [
+            {
+              "id": "שם",
+              "displayName": "שם",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "סוג לקוח",
+              "displayName": "סוג לקוח",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "טלפון",
+              "displayName": "טלפון",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "כתובת",
+              "displayName": "כתובת",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "תאריך",
+              "displayName": "תאריך",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "תיאור",
+              "displayName": "תיאור",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        340,
+        0
+      ],
+      "id": "016ab377-3530-48b2-b348-6994c7a914c2",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7Nf6LV7z3CyBzjEz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "08269750-5eea-4d4a-a0ca-db59777ad6b9",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a9eba164-60b9-4242-a7db-2190575b156c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d04943ab0b8558ce4e0fb65bfcf1537e0e7b9ebd3742679621a0c4e4d54e9e3c"
+  },
+  "id": "HG5MhyGHJZQiXJFp",
+  "tags": []
+}
